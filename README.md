@@ -21,13 +21,11 @@ RPI-IOT-HomeAppliance
 
 ```
 ## Install Python
-
-apt-get install python3-picamera
+apt-get install python3
+apt-get install python3-pip
 
 ## Install pip
-pip install pyrebase
-
- 
+pip3 install pyrebase
 ```
 
 
