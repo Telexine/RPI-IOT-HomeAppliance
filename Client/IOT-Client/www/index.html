@@ -33,16 +33,140 @@
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <link rel="stylesheet" type="text/css" href="css/index.css">
-        <title>Hello World</title>
+        <title>IOT HOME APPLIANCE</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="css/material.css">
+        <script defer src="js/material.min.js"></script>
     </head>
+    <style>
+        .demo-card-wide.mdl-card {
+          width: 95%;
+        }
+        .demo-card-wide > .mdl-card__title {
+          color: #fff;
+          height: 176px;
+          background: url('../assets/demos/welcome_card.jpg') center / cover;
+        }
+        .demo-card-wide > .mdl-card__menu {
+          color: #fff;
+        }
+
+        .padCARD{
+            margin-top:5px;
+            margin-left:auto; 
+            margin-right:auto; 
+
+        }
+</style>
     <body>
-        <div class="app">
-            <h1>Apache CordovaTESTSTADSED</h1>
+  
+
+
+<!-- Always shows a header, even in smaller screens. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <!-- Title -->
+        <span class="mdl-layout-title">IOT Smart Home</span>
+        <!-- Add spacer, to align navigation to the right -->
+
+    </header>
+    <div class="mdl-layout__drawer">
+      <span class="mdl-layout-title">Quick Access</span>
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="#">Light 1</a>
+        <a class="mdl-navigation__link" href="#">Light 2</a>
+        <a class="mdl-navigation__link" href="#">Light 3</a>
+        <a class="mdl-navigation__link" href="#">Light 4</a>
+      </nav>
+    </div>
+    <main class="mdl-layout__content">
+      <div class="page-content">
+        <!-- Your content goes here -->
+    
+
+
+
+
+
+        <!--- TEMPLATE -->
+        <div class="padCARD demo-card-wide mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title">
+                    <div>
+                        
+                        <h4 class="mdl-card__title-text" style="color:grey;">Lighting 1</h4>
+                        <div style="float:left;width:100%"><img src="/img/ico-light.png" style="border-radius:45px;width:90px"></div>
+                       <div> <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1"><input checked class="mdl-switch__input" id="switch-1"   type="checkbox"> <span class="mdl-switch__label"></span></label>
+                       </div>
+                    </div>
+                    <div style="float:left;width:60%">
+                        <div class="mdl-card__supporting-text">
+                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis pellentesque lacus eleifend lacinia...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!---  END TEMPLATE -->
+
+
+        <!--- TEMPLATE2 -->
+        <div class="padCARD demo-card-wide mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title">
+                    <div>
+                        
+                        <h4 class="mdl-card__title-text" style="color:grey;">Lighting 2</h4>
+                        <div style="float:left;width:100%"><img src="/img/ico-light.png" style="border-radius:45px;width:90px"></div>
+                       <div> <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-2"><input checked class="mdl-switch__input" id="switch-2"   type="checkbox"> <span class="mdl-switch__label"></span></label>
+                       </div>
+                    </div>
+                    <div style="float:left;width:60%">
+                        <div class="mdl-card__supporting-text">
+                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis pellentesque lacus eleifend lacinia...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!---  END TEMPLATE -->
+
+        <!--- TEMPLATE -->
+        <div class="padCARD demo-card-wide mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title">
+                    <div>
+                        
+                        <h4 class="mdl-card__title-text" style="color:grey;">Lighting 3</h4>
+                        <div style="float:left;width:100%"><img src="/img/ico-light.png" style="border-radius:45px;width:90px"></div>
+                       <div> <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-3"><input checked class="mdl-switch__input" id="switch-3"   type="checkbox"> <span class="mdl-switch__label"></span></label>
+                       </div>
+                    </div>
+                    <div style="float:left;width:60%">
+                        <div class="mdl-card__supporting-text">
+                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis pellentesque lacus eleifend lacinia...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!---  END TEMPLATE -->
+    
+    
+    </div>
+    </main>
+  </div>
+
+
+
+
+
+
+
+
             <div id="deviceready" class="blink">
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
             </div>
-        </div>
+    
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
     </body>
