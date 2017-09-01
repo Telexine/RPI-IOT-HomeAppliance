@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 app = Flask(__name__)
-
+import RPi.GPIO as GPIO
 #GPIO.setmode(GPIO.BCM)
 
 # 8 Channel
@@ -19,11 +19,9 @@ pins = {
 
    }
 
-joints = {
-    'Grap'  : {'0' : 17, '1': 18, 'state' : "idle"},
-    'Ankle' : {'0' : 27, '1': 22, 'state' : "idle"},
-    'Base'  : {'0' : 23, '1': 24, 'state' : "idle"},
-    'Ankle_Turn'  : {'0' : 10, '1': 9, 'state' : "idle"},
+states = {
+    'on'  : {GPIO.HIGH},
+    'off' : {GPIO.LOW}
    }
 
 
@@ -48,11 +46,11 @@ def main():
 @app.route("/control/<device_ID>/<action>")
 def state_action(device_ID, action):
 
-#   changePin = int(changePin)
- #  deviceName = pins[changePin]['name']
+   #   changePin = int(changePin)
+   #  deviceName = pins[changePin]['name']
 
 
-#STATE CHANGE
+  #STATE CHANGE
    templateData = {
   #    'pins' : pins
    }
