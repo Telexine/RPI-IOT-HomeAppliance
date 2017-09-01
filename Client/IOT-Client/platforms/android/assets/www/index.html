@@ -28,7 +28,7 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+         
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
@@ -37,6 +37,9 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="css/material.css">
         <script defer src="js/material.min.js"></script>
+        
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
+
     </head>
     <style>
         .demo-card-wide.mdl-card {
@@ -96,13 +99,15 @@
                         
                         <h4 class="mdl-card__title-text" style="color:grey;">Lighting 1</h4>
                         <div style="float:left;width:100%"><img src="img/ico-light.png" style="border-radius:45px;width:90px"></div>
-                       <div> <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1"><input checked class="mdl-switch__input" id="switch-1"   type="checkbox"> <span class="mdl-switch__label"></span></label>
+                       <div> <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="1"><input checked class="mdl-switch__input" id="1"   type="checkbox"> <span class="mdl-switch__label"></span></label>
                        </div>
                     </div>
                     <div style="float:left;width:60%">
                         <div class="mdl-card__supporting-text">
-                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis pellentesque lacus eleifend lacinia...
+                             ไฟในห้องนอน
                         </div>
+                     
+                        
                     </div>
                 </div>
             </div>
@@ -117,12 +122,12 @@
                         
                         <h4 class="mdl-card__title-text" style="color:grey;">Lighting 2</h4>
                         <div style="float:left;width:100%"><img src="img/ico-light.png" style="border-radius:45px;width:90px"></div>
-                       <div> <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-2"><input checked class="mdl-switch__input" id="switch-2"   type="checkbox"> <span class="mdl-switch__label"></span></label>
+                       <div> <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="2"><input checked class="mdl-switch__input" id="2"   type="checkbox"> <span class="mdl-switch__label"></span></label>
                        </div>
                     </div>
                     <div style="float:left;width:60%">
                         <div class="mdl-card__supporting-text">
-                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis pellentesque lacus eleifend lacinia...
+                             แอร์
                         </div>
                     </div>
                 </div>
@@ -137,13 +142,14 @@
                         
                         <h4 class="mdl-card__title-text" style="color:grey;">Lighting 3</h4>
                         <div style="float:left;width:100%"><img src="img/ico-light.png" style="border-radius:45px;width:90px"></div>
-                       <div> <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-3"><input checked class="mdl-switch__input" id="switch-3"   type="checkbox"> <span class="mdl-switch__label"></span></label>
+                       <div> <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="3"><input checked class="mdl-switch__input" id="3"   type="checkbox"> <span class="mdl-switch__label"></span></label>
                        </div>
                     </div>
                     <div style="float:left;width:60%">
                         <div class="mdl-card__supporting-text">
-                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis pellentesque lacus eleifend lacinia...
+                             พัดลม
                         </div>
+                         
                     </div>
                 </div>
             </div>
@@ -170,4 +176,42 @@
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
     </body>
+
+
+
+
+<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyA1TvSKyy2PqAA4oAfuVjB9CaIupwxxfno",
+    authDomain: "rpi-iot-homeappliance.firebaseapp.com",
+    databaseURL: "https://rpi-iot-homeappliance.firebaseio.com",
+    projectId: "rpi-iot-homeappliance",
+    storageBucket: "rpi-iot-homeappliance.appspot.com",
+    messagingSenderId: "851476302826"
+  };
+  firebase.initializeApp(config);
+ 
+  document.getElementById("1").addEventListener("click", manipulate);
+  document.getElementById("2").addEventListener("click", manipulate);
+  document.getElementById("3").addEventListener("click", manipulate);
+ 
+ 
+  function manipulate() {
+
+    var chk=this.checked;
+    var id =this.id;
+    console.log(id+" "+chk);
+    firebase.database().ref('devicesID/' + id).set({
+    state: chk
+  });
+}
+
+
+
+  
+</script>
+
+
 </html>
