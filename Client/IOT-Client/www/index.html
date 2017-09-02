@@ -159,6 +159,12 @@
     
     </div>
     </main>
+
+    <!---  Snackbar -->
+    <div class="mdl-js-snackbar mdl-snackbar" id="demo-toast-example">
+        <div class="mdl-snackbar__text"></div><button class="mdl-snackbar__action" type="button"></button>
+    </div>
+
   </div>
 
 
@@ -196,10 +202,29 @@
   document.getElementById("1").addEventListener("click", manipulate);
   document.getElementById("2").addEventListener("click", manipulate);
   document.getElementById("3").addEventListener("click", manipulate);
- 
- 
-  function manipulate() {
 
+// Check is firebase are connected
+    var firebaseState = firebase.database().ref(".info/connected");
+    firebaseState.on('value', function(connectedSnap) {
+    if (connectedSnap.val() === true) {
+        /* we're connected! */
+        notification("You are connected to cloud");
+    } else {
+        /* we're disconnected! */
+ 
+        notification("You are Disconnected to cloud");
+    }
+    });
+
+
+
+  
+
+
+
+ // Main function ======================================================
+
+  function manipulate() {
     var chk=this.checked;
     var id =this.id;
     console.log(id+" "+chk);
@@ -208,7 +233,15 @@
   });
 }
 
+	// SnackBar notification
+	function notification(msg) {
+	 'use strict';
+	 var snackbarContainer = document.querySelector('#demo-toast-example');
+	 
+	   var data = {message: msg};
+	   snackbarContainer.MaterialSnackbar.showSnackbar(data);
 
+	};
 
   
 </script>

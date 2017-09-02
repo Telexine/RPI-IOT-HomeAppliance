@@ -159,6 +159,12 @@
     
     </div>
     </main>
+
+    <!---  Snackbar -->
+    <div class="mdl-js-snackbar mdl-snackbar" id="demo-toast-example">
+        <div class="mdl-snackbar__text"></div><button class="mdl-snackbar__action" type="button"></button>
+    </div>
+
   </div>
 
 
@@ -196,19 +202,84 @@
   document.getElementById("1").addEventListener("click", manipulate);
   document.getElementById("2").addEventListener("click", manipulate);
   document.getElementById("3").addEventListener("click", manipulate);
- 
- 
-  function manipulate() {
 
+// Check is firebase are connected
+    console.log(config.databaseURL);
+   
+    var userStfirebaseRefate = firebase.database().ref(".info/connected");
+    userStfirebaseRefate.on('value', function(connectedSnap) {
+    if (connectedSnap.val() === true) {
+        /* we're connected! */
+        console.log('connected');
+        notification("You are connected to cloud");
+    } else {
+        /* we're disconnected! */
+        console.log('DIsconnected');
+        notification("You are Disconnected to cloud");
+    }
+    });
+
+	firebase.auth().onAuthStateChanged(function(user) {
+
+	 console.log("onAuthStateChanged");
+	
+
+	     //This User Is Online
+	     let amOnline = firebase.database().ref(".info/connected");
+	     let userRef = firebase.database().ref("presence/client1");
+	     amOnline.on('value', function(snapshot) {
+	       if (snapshot.val()) {
+	         userRef.onDisconnect().remove();
+	         userRef.set(true);
+	       }
+	     });
+	});
+ 
+
+
+
+ // Listening 
+    var userState = firebase.database().ref("presence/");
+	 
+	 userState.on('child_added', function(childSnapshot, prevChildKey) {
+	   console.log("This Id is login "+ childSnapshot.key);
+	    avartarOnline(childSnapshot.key);
+	   
+	     if(childSnapshot.key!=uid){
+	     getUserName(childSnapshot.key).then(function(result){notification(result +" Is Online ");});
+	     }else{
+	       notification("Connected");
+	     }
+	});
+	userState.on('child_removed', function(childSnapshot) {
+	 console.log("This Id is logoff  "+ childSnapshot.key);
+	 avartarOffline(childSnapshot.key);
+	  getUserName(childSnapshot.key).then(function(result){notification(result +" Is Offline ");});
+	});
+ 
+
+
+
+ // Main function ======================================================
+
+  function manipulate() {
     var chk=this.checked;
     var id =this.id;
     console.log(id+" "+chk);
-    firebase.database().ref('devices/' + id).set({
+    firebase.database().ref('devicesID/' + id).set({
     state: chk
   });
 }
 
+	// SnackBar notification
+	function notification(msg) {
+	 'use strict';
+	 var snackbarContainer = document.querySelector('#demo-toast-example');
+	 
+	   var data = {message: msg};
+	   snackbarContainer.MaterialSnackbar.showSnackbar(data);
 
+	};
 
   
 </script>
