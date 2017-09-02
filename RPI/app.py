@@ -3,14 +3,42 @@
 import RPi.GPIO as GPIO
 from time import sleep
 from firebase import firebase
-import json
+
+GPIO.setmode(GPIO.BCM)
+
+#INIT
+devicesID = {
+    's1' :{'pin': 17},
+    's2' :{'pin': 18},
+    's3' :{'pin': 27},
+    's4' :{'pin': 22},
+    's5' :{'pin': 23},
+    's6' :{'pin': 24},
+    's7' :{'pin': 10},
+    's8' :{'pin': 9}
+}
+
+for i in devicesID:
+    GPIO.setup(devicesID[i]['pin'], GPIO.OUT)
+#END INIT
+
+def compareState(devices,getState):
+    if GPIO.input(devicesID[devices]['pin']) != getState:
+        if getState == 'true':
+            GPIO.output(devicesID[devices]['pin'], GPIO.HIGH)
+        else:
+            GPIO.output(devicesID[devices]['pin'], GPIO.LOW)
+
 
 firebase = firebase.FirebaseApplication('https://rpi-iot-homeappliance.firebaseio.com', None)
-controls = firebase.get('/devicesID', None)
 while True:
+    
+        s1 = firebase.get('/devicesID','1/state')
+        s2 = firebase.get('/deviceID','2/state')
+        s3 = firebase.get('/deviceID','3/state')
+        
+        compareState('s1',s1)
+        compareState('s2',s2)
+        compareState('s3',s3)
 
-	s1 = firebase.get('/devicesID','1/state')
-	s2 = firebase.get('/deviceID','2/state')
-	s3 = firebase.get('/deviceID','3/state')
-
-	sleep(2)
+        sleep(2)
