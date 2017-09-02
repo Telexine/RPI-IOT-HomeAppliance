@@ -105,6 +105,20 @@
                     <div style="float:left;width:60%">
                         <div class="mdl-card__supporting-text">
                              ไฟในห้องนอน
+                             <table>
+                                 <tr> 
+                                     <td>เปิดล่าสุด</td>
+                                     <td>9:34AM. 2 sep 2017</td>
+                                 </tr>
+                                 <tr> 
+                                        <td>ใช้ไป </td>
+                                        <td>23.2 kW/ 0.0232 Units </td>
+                                    </tr>
+                                    <tr> 
+                                            <td>ถือเป็น  </td>
+                                            <td>0.751 บาท</td>
+                                        </tr>
+                             </table>
                         </div>
                      
                         
@@ -128,6 +142,20 @@
                     <div style="float:left;width:60%">
                         <div class="mdl-card__supporting-text">
                              แอร์
+                             <table>
+                                    <tr> 
+                                        <td>เปิดล่าสุด</td>
+                                        <td>9:34AM. 2 sep 2017</td>
+                                    </tr>
+                                    <tr> 
+                                           <td>ใช้ไป </td>
+                                           <td>232.2 kW/ 0.232 Units </td>
+                                       </tr>
+                                       <tr> 
+                                               <td>ถือเป็น  </td>
+                                               <td>7.51 บาท</td>
+                                           </tr>
+                                </table>
                         </div>
                     </div>
                 </div>
@@ -147,7 +175,20 @@
                     </div>
                     <div style="float:left;width:60%">
                         <div class="mdl-card__supporting-text">
-                             พัดลม
+                             พัดลม  <table>
+                                    <tr> 
+                                        <td>เปิดล่าสุด</td>
+                                        <td>9:34AM. 2 sep 2017</td>
+                                    </tr>
+                                    <tr> 
+                                           <td>ใช้ไป </td>
+                                           <td>23.2 kW/ 0.0232 Units </td>
+                                       </tr>
+                                       <tr> 
+                                               <td>ถือเป็น  </td>
+                                               <td>0.751 บาท</td>
+                                           </tr>
+                                </table>
                         </div>
                          
                     </div>
@@ -204,59 +245,29 @@
   document.getElementById("3").addEventListener("click", manipulate);
 
 // Check is firebase are connected
-    console.log(config.databaseURL);
-   
-    var userStfirebaseRefate = firebase.database().ref(".info/connected");
-    userStfirebaseRefate.on('value', function(connectedSnap) {
+    var firebaseState = firebase.database().ref(".info/connected");
+    firebaseState.on('value', function(connectedSnap) {
     if (connectedSnap.val() === true) {
         /* we're connected! */
-        console.log('connected');
         notification("You are connected to cloud");
     } else {
         /* we're disconnected! */
-        console.log('DIsconnected');
+ 
         notification("You are Disconnected to cloud");
     }
     });
 
-	firebase.auth().onAuthStateChanged(function(user) {
+//Listening
 
-	 console.log("onAuthStateChanged");
-	
+	// Listening On device state change
+    var Rref = firebase.database().ref("deviceID/");
+	 Rref.orderByKey().limitToLast(10).on('child_changed', function(childSnapshot, prevChildKey) {
 
-	     //This User Is Online
-	     let amOnline = firebase.database().ref(".info/connected");
-	     let userRef = firebase.database().ref("presence/client1");
-	     amOnline.on('value', function(snapshot) {
-	       if (snapshot.val()) {
-	         userRef.onDisconnect().remove();
-	         userRef.set(true);
-	       }
-	     });
-	});
- 
-
-
-
- // Listening 
-    var userState = firebase.database().ref("presence/");
+	appendMessage(childSnapshot.val().message,childSnapshot.val().uAvartar,childSnapshot.val().uid,childSnapshot.val().name, childSnapshot.val().timestamp);
 	 
-	 userState.on('child_added', function(childSnapshot, prevChildKey) {
-	   console.log("This Id is login "+ childSnapshot.key);
-	    avartarOnline(childSnapshot.key);
-	   
-	     if(childSnapshot.key!=uid){
-	     getUserName(childSnapshot.key).then(function(result){notification(result +" Is Online ");});
-	     }else{
-	       notification("Connected");
-	     }
 	});
-	userState.on('child_removed', function(childSnapshot) {
-	 console.log("This Id is logoff  "+ childSnapshot.key);
-	 avartarOffline(childSnapshot.key);
-	  getUserName(childSnapshot.key).then(function(result){notification(result +" Is Offline ");});
-	});
- 
+
+  
 
 
 
@@ -267,7 +278,8 @@
     var id =this.id;
     console.log(id+" "+chk);
     firebase.database().ref('devicesID/' + id).set({
-    state: chk
+    state: chk,
+    lastupdate: firebase.database.ServerValue.TIMESTAMP
   });
 }
 

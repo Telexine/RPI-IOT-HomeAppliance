@@ -105,6 +105,20 @@
                     <div style="float:left;width:60%">
                         <div class="mdl-card__supporting-text">
                              ไฟในห้องนอน
+                             <table>
+                                 <tr> 
+                                     <td>เปิดล่าสุด</td>
+                                     <td>9:34AM. 2 sep 2017</td>
+                                 </tr>
+                                 <tr> 
+                                        <td>ใช้ไป </td>
+                                        <td>23.2 kW/ 0.0232 Units </td>
+                                    </tr>
+                                    <tr> 
+                                            <td>ถือเป็น  </td>
+                                            <td>0.751 บาท</td>
+                                        </tr>
+                             </table>
                         </div>
                      
                         
@@ -128,6 +142,20 @@
                     <div style="float:left;width:60%">
                         <div class="mdl-card__supporting-text">
                              แอร์
+                             <table>
+                                    <tr> 
+                                        <td>เปิดล่าสุด</td>
+                                        <td>9:34AM. 2 sep 2017</td>
+                                    </tr>
+                                    <tr> 
+                                           <td>ใช้ไป </td>
+                                           <td>232.2 kW/ 0.232 Units </td>
+                                       </tr>
+                                       <tr> 
+                                               <td>ถือเป็น  </td>
+                                               <td>7.51 บาท</td>
+                                           </tr>
+                                </table>
                         </div>
                     </div>
                 </div>
@@ -147,7 +175,20 @@
                     </div>
                     <div style="float:left;width:60%">
                         <div class="mdl-card__supporting-text">
-                             พัดลม
+                             พัดลม  <table>
+                                    <tr> 
+                                        <td>เปิดล่าสุด</td>
+                                        <td>9:34AM. 2 sep 2017</td>
+                                    </tr>
+                                    <tr> 
+                                           <td>ใช้ไป </td>
+                                           <td>23.2 kW/ 0.0232 Units </td>
+                                       </tr>
+                                       <tr> 
+                                               <td>ถือเป็น  </td>
+                                               <td>0.751 บาท</td>
+                                           </tr>
+                                </table>
                         </div>
                          
                     </div>
@@ -216,7 +257,15 @@
     }
     });
 
+//Listening
 
+	// Listening On device state change
+    var Rref = firebase.database().ref("deviceID/");
+	 Rref.orderByKey().limitToLast(10).on('child_changed', function(childSnapshot, prevChildKey) {
+
+	//appendMessage(childSnapshot.val().message,childSnapshot.val().uAvartar,childSnapshot.val().uid,childSnapshot.val().name, childSnapshot.val().timestamp);
+	 
+	});
 
   
 
@@ -229,8 +278,12 @@
     var id =this.id;
     console.log(id+" "+chk);
     firebase.database().ref('devicesID/' + id).set({
-    state: chk
+    state: chk,
+    lastupdate: firebase.database.ServerValue.TIMESTAMP
   });
+  SimpleDateFormat sfd = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+sfd.format(new Date(timestamp));
+    notification("Device "+id+" is "+(chk? "ON":"Off") on );
 }
 
 	// SnackBar notification
