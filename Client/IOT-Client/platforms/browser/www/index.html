@@ -263,7 +263,7 @@
     var Rref = firebase.database().ref("deviceID/");
 	 Rref.orderByKey().limitToLast(10).on('child_changed', function(childSnapshot, prevChildKey) {
 
-	appendMessage(childSnapshot.val().message,childSnapshot.val().uAvartar,childSnapshot.val().uid,childSnapshot.val().name, childSnapshot.val().timestamp);
+	//appendMessage(childSnapshot.val().message,childSnapshot.val().uAvartar,childSnapshot.val().uid,childSnapshot.val().name, childSnapshot.val().timestamp);
 	 
 	});
 
@@ -281,6 +281,8 @@
     state: chk,
     lastupdate: firebase.database.ServerValue.TIMESTAMP
   });
+ 
+    notification("Device "+id+" is "+(chk? "ON":"Off"));
 }
 
 	// SnackBar notification
