@@ -24,7 +24,7 @@ for i in devicesID:
 
 def compareState(devices,getState):
     if GPIO.input(devicesID[devices]['pin']) != getState:
-        if getState == 'true':
+        if getState === 'true':
             GPIO.output(devicesID[devices]['pin'], GPIO.HIGH)
         else:
             GPIO.output(devicesID[devices]['pin'], GPIO.LOW)
@@ -34,8 +34,8 @@ firebase = firebase.FirebaseApplication('https://rpi-iot-homeappliance.firebasei
 while True:
     
         s1 = firebase.get('/devicesID','1/state')
-        s2 = firebase.get('/deviceID','2/state')
-        s3 = firebase.get('/deviceID','3/state')
+        s2 = firebase.get('/devicesID','2/state')
+        s3 = firebase.get('/devicesID','3/state')
         
         compareState('s1',s1)
         compareState('s2',s2)

@@ -244,10 +244,19 @@
  
 
   $( document ).ready(function() {
+
     document.getElementById("1").addEventListener("click", manipulate);
     document.getElementById("2").addEventListener("click", manipulate);
     document.getElementById("3").addEventListener("click", manipulate);
 
+    for(let i =1;i<=3;i++){
+
+        var myCheckbox = document.getElementById(i);
+        if(i==true){myCheckbox.parentElement.MaterialSwitch.off();}else myCheckbox.parentElement.MaterialSwitch.on();;
+     
+      
+     console.log(getDeviceState(i));
+  }
 // Check is firebase are connected
 var firebaseState = firebase.database().ref(".info/connected");
     firebaseState.on('value', function(connectedSnap) {
@@ -261,6 +270,19 @@ var firebaseState = firebase.database().ref(".info/connected");
     }
     });
 });
+ 
+let getDeviceState =function(id){
+	 let getDeviceStatePromise = new Promise (function(resolve,reject){
+	   firebase.database().ref('devicesID/'+id).once('value').then(function(snapshot){
+            filteredObj = snapshot.val().state;
+	       resolve(filteredObj);
+	   });
+	 });
+	 return getDeviceStatePromise;
+	}
+
+
+
  
 //Listening
 
@@ -300,7 +322,7 @@ var firebaseState = firebase.database().ref(".info/connected");
 	 'use strict';
 	 var snackbarContainer = document.querySelector('#demo-toast-example');
 	 
-	   var Msgdata = {message: msg,timeout: 5000};
+	   var Msgdata = {message: msg,timeout: 2000};
 	   snackbarContainer.MaterialSnackbar.showSnackbar(Msgdata);
 
 	};
