@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import RPi.GPIO as GPIO
+import datetime as t
 from time import sleep
 from firebase import firebase
 
@@ -23,11 +24,14 @@ for i in devicesID:
 #END INIT
 
 def compareState(devices,getState):
-    if GPIO.input(devicesID[devices]['pin']) != getState:
-        if getState === 'true':
-            GPIO.output(devicesID[devices]['pin'], GPIO.HIGH)
-        else:
+    if GPIO.input(devicesID[devices]['pin']) == getState:
+	
+        if getState == True:
             GPIO.output(devicesID[devices]['pin'], GPIO.LOW)
+	    print "%s : DEVICE   %s   Turn ON "  % (t.datetime.now(),devices)
+        else:
+            GPIO.output(devicesID[devices]['pin'], GPIO.HIGH)
+	    print "%s : DEVICE   %s   Turn OF "  % (t.datetime.now(),devices)
 
 
 firebase = firebase.FirebaseApplication('https://rpi-iot-homeappliance.firebaseio.com', None)
@@ -41,4 +45,7 @@ while True:
         compareState('s2',s2)
         compareState('s3',s3)
 
-        sleep(2)
+        sleep(0.01)
+
+
+GPIO.cleanup()
