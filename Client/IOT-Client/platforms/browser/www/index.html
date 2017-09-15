@@ -37,7 +37,7 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="css/material.css">
         <script defer src="js/material.min.js"></script>
-        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
 
     </head>
@@ -48,7 +48,7 @@
         .demo-card-wide > .mdl-card__title {
           color: #fff;
           height: 176px;
-          background: url('../assets/demos/welcome_card.jpg') center / cover;
+          background: url() center / cover;
         }
         .demo-card-wide > .mdl-card__menu {
           color: #fff;
@@ -227,8 +227,10 @@
 
 
 
-<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+<script src="js/firebase.js"></script>
+
 <script>
+    
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyA1TvSKyy2PqAA4oAfuVjB9CaIupwxxfno",
@@ -240,32 +242,40 @@
   };
   firebase.initializeApp(config);
  
-  document.getElementById("1").addEventListener("click", manipulate);
-  document.getElementById("2").addEventListener("click", manipulate);
-  document.getElementById("3").addEventListener("click", manipulate);
+
+  $( document ).ready(function() {
+    document.getElementById("1").addEventListener("click", manipulate);
+    document.getElementById("2").addEventListener("click", manipulate);
+    document.getElementById("3").addEventListener("click", manipulate);
 
 // Check is firebase are connected
-    var firebaseState = firebase.database().ref(".info/connected");
+var firebaseState = firebase.database().ref(".info/connected");
     firebaseState.on('value', function(connectedSnap) {
     if (connectedSnap.val() === true) {
         /* we're connected! */
-        notification("You are connected to cloud");
+       notification("You are connected to cloud");
     } else {
         /* we're disconnected! */
  
         notification("You are Disconnected to cloud");
     }
     });
-
+});
+ 
 //Listening
 
 	// Listening On device state change
     var Rref = firebase.database().ref("deviceID/");
 	 Rref.orderByKey().limitToLast(10).on('child_changed', function(childSnapshot, prevChildKey) {
-
+        
 	//appendMessage(childSnapshot.val().message,childSnapshot.val().uAvartar,childSnapshot.val().uid,childSnapshot.val().name, childSnapshot.val().timestamp);
 	 
 	});
+
+
+
+
+
 
   
 
@@ -290,12 +300,15 @@
 	 'use strict';
 	 var snackbarContainer = document.querySelector('#demo-toast-example');
 	 
-	   var data = {message: msg};
-	   snackbarContainer.MaterialSnackbar.showSnackbar(data);
+	   var Msgdata = {message: msg,timeout: 5000};
+	   snackbarContainer.MaterialSnackbar.showSnackbar(Msgdata);
 
 	};
 
   
+
+
+
 </script>
 
 
