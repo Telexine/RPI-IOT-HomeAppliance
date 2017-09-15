@@ -245,20 +245,16 @@
 
   $( document ).ready(function() {
 
-    document.getElementById("1").addEventListener("click", manipulate);
-    document.getElementById("2").addEventListener("click", manipulate);
-    document.getElementById("3").addEventListener("click", manipulate);
-
     for(let i =1;i<=3;i++){
-
-        var myCheckbox = document.getElementById(i);
-        if(i==true){myCheckbox.parentElement.MaterialSwitch.off();}else myCheckbox.parentElement.MaterialSwitch.on();;
+        document.getElementById(i).addEventListener("click", manipulate);
+        let myCheckbox = document.getElementById(i);
+        if(i==true){myCheckbox.parentElement.MaterialSwitch.on();}else myCheckbox.parentElement.MaterialSwitch.off();;
      
       
-     console.log(getDeviceState(i));
+     
   }
 // Check is firebase are connected
-var firebaseState = firebase.database().ref(".info/connected");
+let firebaseState = firebase.database().ref(".info/connected");
     firebaseState.on('value', function(connectedSnap) {
     if (connectedSnap.val() === true) {
         /* we're connected! */
@@ -287,11 +283,16 @@ let getDeviceState =function(id){
 //Listening
 
 	// Listening On device state change
-    var Rref = firebase.database().ref("deviceID/");
+    var Rref = firebase.database().ref("devicesID/");
 	 Rref.orderByKey().limitToLast(10).on('child_changed', function(childSnapshot, prevChildKey) {
-        
-	//appendMessage(childSnapshot.val().message,childSnapshot.val().uAvartar,childSnapshot.val().uid,childSnapshot.val().name, childSnapshot.val().timestamp);
-	 
+        let myCheckbox = document.getElementById(childSnapshot.key);
+        if(childSnapshot.val().state==true){
+            myCheckbox.parentElement.MaterialSwitch.on();
+            notification("Device "+childSnapshot.key+" is Remoted On ");
+        }else{
+            myCheckbox.parentElement.MaterialSwitch.off()
+            notification("Device "+childSnapshot.key+" is Remoted Off ");
+        };
 	});
 
 
@@ -309,7 +310,7 @@ let getDeviceState =function(id){
     var chk=this.checked;
     var id =this.id;
     console.log(id+" "+chk);
-    firebase.database().ref('devicesID/' + id).set({
+    firebase.database().ref('devicesID/' + id).update({
     state: chk,
     lastupdate: firebase.database.ServerValue.TIMESTAMP
   });
@@ -322,7 +323,7 @@ let getDeviceState =function(id){
 	 'use strict';
 	 var snackbarContainer = document.querySelector('#demo-toast-example');
 	 
-	   var Msgdata = {message: msg,timeout: 2000};
+	   var Msgdata = {message: msg,timeout: 1000};
 	   snackbarContainer.MaterialSnackbar.showSnackbar(Msgdata);
 
 	};
