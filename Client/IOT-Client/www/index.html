@@ -70,7 +70,7 @@
     <header class="mdl-layout__header">
       <div class="mdl-layout__header-row">
         <!-- Title -->
-        <span class="mdl-layout-title">IOT Smart Home</span>
+        <span class="mdl-layout-title">IOT Smart Home d</span>
         <!-- Add spacer, to align navigation to the right -->
 
     </header>
@@ -104,14 +104,14 @@
                     </div>
                     <div style="float:left;width:60%">
                         <div class="mdl-card__supporting-text">
-                             <spand>d</spand>
+                            <span>Stat:</span>  
                              <table>
                                  <tr> 
                                      <td>เปิดล่าสุด</td>
                                      <td  ><span id="t1"> </span></td>
                                  </tr>
                                  <tr> 
-                                        <td>Consumtion </td>
+                                        <td>Consumption </td>
                                         <td > <span id="w1"> </span>  </td>
                                     </tr>
                                     <tr> 
@@ -141,14 +141,14 @@
                     </div>
                     <div style="float:left;width:60%">
                         <div class="mdl-card__supporting-text">
-                            <span  >dd</span> 
+                            <span>Stat:</span>  
                              <table>
                                     <tr> 
                                         <td>เปิดล่าสุด</td>
                                         <td> <span id="t2"></span></td>
                                     </tr>
                                     <tr> 
-                                           <td>Consumtion </td>
+                                           <td>Consumption </td>
                                            <td> <span id="w2"></span> </td>
                                        </tr>
                                        <tr> 
@@ -175,13 +175,13 @@
                     </div>
                     <div style="float:left;width:60%">
                         <div class="mdl-card__supporting-text">
-                            <span id=" ">ไฟในห้องนอน</span>  <table>
+                            <span>Stat:</span>   <table>
                                     <tr> 
                                         <td>เปิดล่าสุด</td>
                                         <td ><span id="t3"></span></td>
                                     </tr>
                                     <tr> 
-                                           <td>Consumtion </td>
+                                           <td>Consumption </td>
                                            <td ><span id="w3"></span> </td>
                                        </tr>
                                        <tr> 
@@ -205,25 +205,25 @@
             <div class="mdl-card__title">
                 <div>
                     
-                    <h4 class="mdl-card__title-text" style="color:grey;">Lighting 4</h4>
+                    <h4 id="desc4"class="mdl-card__title-text" style="color:grey;"> </h4>
                     <div style="float:left;width:100%"><img src="img/ico-light.png" style="border-radius:45px;width:90px"></div>
                    <div> <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="4"><input checked class="mdl-switch__input" id="4"   type="checkbox"> <span class="mdl-switch__label"></span></label>
                    </div>
                 </div>
                 <div style="float:left;width:60%">
                     <div class="mdl-card__supporting-text">
-                        <span id="desc4">ไฟในห้องนอน</span>   <table>
+                        <span>Stat:</span>   <table>
                                 <tr> 
                                     <td>เปิดล่าสุด</td>
-                                    <td id="t4">9:34AM. 2 sep 2017</td>
+                                    <td><span id="t4"></span></td>
                                 </tr>
                                 <tr> 
-                                       <td>Consumtion </td>
-                                       <td id="w4">23.2 kW/ 0.0232 Units </td>
+                                       <td>Consumption </td>
+                                       <td ><span id="w4"></span></td>
                                    </tr>
                                    <tr> 
                                            <td>ถือเป็น  </td>
-                                           <td ><span id="c4"></span> 0.751 บาท</td>
+                                           <td ><span id="c4"></span> บาท</td>
                                        </tr>
                             </table>
                     </div>
@@ -303,7 +303,9 @@
 $( document ).ready(function() {
 
 
-
+// set Refresh every 30 sec 
+setInterval(function(){
+    refresh()}, 30000)
 
 
 
@@ -335,14 +337,139 @@ let firebaseState = firebase.database().ref(".info/connected");
     for(let i =1;i<=4;i++){
         document.getElementById(i).addEventListener("click", manipulate);
         let myCheckbox = document.getElementById(i);
-        Update(i);
-        if(i==true){myCheckbox.parentElement.MaterialSwitch.on();}else myCheckbox.parentElement.MaterialSwitch.off();;
+        
+
+        // fetch from cloud
+        var device = firebase.database().ref("devicesID/"+i);
+        let s;
+        
+       getstate(i).then(function(result){ 
+            s=result;
+            if(s==true){
+            myCheckbox.parentElement.MaterialSwitch.on();
+              }else myCheckbox.parentElement.MaterialSwitch.off();
+            Update(i);
+        }); 
+            
+        
+       
+      
+        
   }
 
  
 }); //end document ready
  
 
+
+
+ // Main function ======================================================
+function refresh(){
+    for(i = 1; i <=4;i++){
+    Update(i);
+    }
+}
+
+function Update(id){
+     
+
+    getDeviceName(id).then(function(Dname){ 
+            document.getElementById('desc'+id).innerHTML =  Dname;
+        });
+
+        getDeviceWatt(id).then(function(Dwatt){ 
+            document.getElementById('w'+id).innerHTML = Dwatt + " Watt / Energy Into the load :";
+            getkWh(id).then(function(DkWh){ 
+               document.getElementById('w'+id).innerHTML += DkWh.toFixed(4) + " kWh";
+ 
+        }); 
+        }); 
+         getDeviceLastupdate(id).then(function(Dts){ 
+            document.getElementById('t'+id).innerHTML = Dts + " : by ";
+            getDeviceby(id).then(function(DbyUser){
+            document.getElementById('t'+id).innerHTML += DbyUser;
+        });
+        });
+        getkWh(id).then(function(cal){ 
+            document.getElementById('c'+id).innerHTML = ((cal*1.5445)).toFixed(2);
+ 
+        }); 
+
+        return true;
+}   
+ 
+
+
+  function manipulate() {
+    var chk=this.checked;
+    var id =this.id;
+    console.log(id+" "+chk);
+    firebase.database().ref('devicesID/' + id).update({
+    state: chk,
+    lastupdate: firebase.database.ServerValue.TIMESTAMP,
+    by: deviceNA
+  });
+  if(chk==false){
+      storeUsage(id);
+  }
+    notification("Device "+id+" is "+(chk? "ON":"Off"));
+    return true;
+}
+
+
+//Turn oFF Use in turn off
+function storeUsage(id){
+
+
+let curTime =  new Date(Date.now()) ;
+let  newUsage ;
+let wat;
+let usage;
+
+var device = firebase.database().ref("devicesID/"+id);
+
+
+// get kw
+
+device.orderByKey().limitToLast(10).on('value', function(childSnapshot3) {
+         watt=childSnapshot3.val().wat;
+       });
+ 
+
+device.orderByKey().limitToLast(10).on('value', function(childSnapshot) {
+   
+      var LastUpdate = new Date(childSnapshot.val().lastupdate) ;
+
+       usage = Math.abs(LastUpdate.getTime()-curTime.getTime());
+       usage =(usage/ 36e5)*watt; // 60*60*1000
+
+
+
+});
+
+device.orderByKey().limitToLast(10).on('value', function(childSnapshot2) {
+         newUsage =usage+childSnapshot2.val().kWh;
+
+       });
+
+       firebase.database().ref('devicesID/' + id).update({
+                kWh: newUsage
+            });
+return usage;
+
+}
+
+	// SnackBar notification
+	function notification(msg) {
+	 'use strict';
+	 var snackbarContainer = document.querySelector('#demo-toast-example');
+	 
+	   var Msgdata = {message: msg,timeout: 1000};
+	   snackbarContainer.MaterialSnackbar.showSnackbar(Msgdata);
+
+	};
+
+  
 
 // Promise Function
 let getDeviceState =function(id){
@@ -373,6 +500,17 @@ let getDeviceLastupdate =function(id){
 	   });
 	 });
 	 return getDeviceLastupdatePromise;
+    }
+    
+let getDeviceLastupdateRAW =function(id){
+	 let getDeviceLastupdateRAWPromise = new Promise (function(resolve,reject){
+	   firebase.database().ref('devicesID/'+id).once('value').then(function(snapshot){
+            filteredObj =  snapshot.val().lastupdate;
+            
+	       resolve(filteredObj );
+	   });
+	 });
+	 return getDeviceLastupdateRAWPromise;
 	}
 let getDeviceName =function(id){
 	 let getDeviceNamePromise = new Promise (function(resolve,reject){
@@ -394,8 +532,27 @@ let getDeviceby =function(id){
 	 });
 	 return getDevicebyPromise;
     }
-    
 
+    let getkWh =function(id){
+	 let getkWhPromise = new Promise (function(resolve,reject){
+	   firebase.database().ref('devicesID/'+id).once('value').then(function(snapshot){
+            filteredObj = snapshot.val().kWh;
+            
+	       resolve(filteredObj);
+	   });
+	 });
+	 return getkWhPromise;
+    }
+    let getstate =function(id){
+	 let getstatePromise = new Promise (function(resolve,reject){
+	   firebase.database().ref('devicesID/'+id).once('value').then(function(snapshot){
+            filteredObj = snapshot.val().state;
+            
+	       resolve(filteredObj);
+	   });
+	 });
+	 return getstatePromise;
+    }
 
 
 
@@ -425,56 +582,6 @@ let getDeviceby =function(id){
         // EDIT Info
 	});
 
-
-
-function Update(id){
-     
-
-    getDeviceName(id).then(function(result){ 
-            document.getElementById('desc'+id).innerHTML =  result;
-        });
-
-        getDeviceWatt(id).then(function(result){ 
-            document.getElementById('w'+id).innerHTML = result + "  Watt";
-        });
-         getDeviceLastupdate(id).then(function(result){ 
-            document.getElementById('t'+id).innerHTML = result + " : by ";
-            getDeviceby(id).then(function(result){
-            document.getElementById('t'+id).innerHTML += result;
-        });
-        });
-       
-}   
- 
-
-
-
- // Main function ======================================================
-
-  function manipulate() {
-    var chk=this.checked;
-    var id =this.id;
-    console.log(id+" "+chk);
-    firebase.database().ref('devicesID/' + id).update({
-    state: chk,
-    lastupdate: firebase.database.ServerValue.TIMESTAMP,
-    by: deviceNA
-  });
- 
-    notification("Device "+id+" is "+(chk? "ON":"Off"));
-}
-
-	// SnackBar notification
-	function notification(msg) {
-	 'use strict';
-	 var snackbarContainer = document.querySelector('#demo-toast-example');
-	 
-	   var Msgdata = {message: msg,timeout: 1000};
-	   snackbarContainer.MaterialSnackbar.showSnackbar(Msgdata);
-
-	};
-
-  
 
 
 
