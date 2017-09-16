@@ -269,6 +269,7 @@
 <script>
        
   // Initialize Firebase
+  
   var config = {
     apiKey: "AIzaSyA1TvSKyy2PqAA4oAfuVjB9CaIupwxxfno",
     authDomain: "rpi-iot-homeappliance.firebaseapp.com",
@@ -278,25 +279,33 @@
     messagingSenderId: "851476302826"
   };
   firebase.initializeApp(config);
-  var ua = navigator.userAgent,
+   
+    // GET DEVICE INFO
+    var ua = navigator.userAgent,
     browser = {
     iPad: /iPad/.test(ua),
     iPhone: /iPhone/.test(ua),
     Android4: /Android 4/.test(ua)
-};
+    };
 
-let ud ;
-if(ua.indexOf('build/')==-1){ // webbrowser 
-    ud ="WEB "+ua.substr(ua.search(';')+2,ua.indexOf(')',ua.search(';'))-ua.search(';')-2);
-}else{
-    // mobiledevice
-    ud = ua.substr(ua.search('Build/')+6,ua.indexOf(';',ua.search('Build/'))-ua.search('Build/')-6);
-}
-const deviceNA= ud;  // Current Device NAme
-ud=null;
+  let ud = "";
+    if(ua.indexOf('Build/')>0){ // mobile 
+        ud = ua.substr(ua.search('Build/')+6,ua.indexOf(';',ua.search('Build/'))-ua.search('Build/')-6);
+    }else{
+        // web
+   
+        ud ="WEB "+ua.substr(ua.search(';')+2,ua.indexOf(')',ua.search(';'))-ua.search(';')-2);
+    }
+    window.deviceNA= ud;  // Current Device NAme
+   
+
 
 $( document ).ready(function() {
-    // Add Event click to toggle also fe
+
+
+
+
+    // Add Event click to toggle 
     for(let i =1;i<=4;i++){
         document.getElementById(i).addEventListener("click", manipulate);
         let myCheckbox = document.getElementById(i);
@@ -329,6 +338,9 @@ let firebaseState = firebase.database().ref(".info/connected");
 
 }); //end document ready
  
+
+
+// Promise Function
 let getDeviceState =function(id){
 	 let getDeviceStatePromise = new Promise (function(resolve,reject){
 	   firebase.database().ref('devicesID/'+id).once('value').then(function(snapshot){
@@ -337,6 +349,15 @@ let getDeviceState =function(id){
 	   });
 	 });
 	 return getDeviceStatePromise;
+	}
+let getDeviceWatt =function(id){
+	 let getDeviceWattPromise = new Promise (function(resolve,reject){
+	   firebase.database().ref('devicesID/'+id).once('value').then(function(snapshot){
+            filteredObj = snapshot.val().wat;
+	       resolve(filteredObj);
+	   });
+	 });
+	 return getDeviceWatt;
 	}
 
 
@@ -350,10 +371,15 @@ let getDeviceState =function(id){
         let myCheckbox = document.getElementById(childSnapshot.key);
         if(childSnapshot.val().state==true){
             myCheckbox.parentElement.MaterialSwitch.on();
-            notification("Device "+childSnapshot.key+" is Remoted On ");
+            if(deviceNA!=childSnapshot.val().by){
+            notification("Device "+childSnapshot.key+" is Remoted On by "+childSnapshot.val().by);
+ 
+             }
         }else{
             myCheckbox.parentElement.MaterialSwitch.off()
-            notification("Device "+childSnapshot.key+" is Remoted Off ");
+            if(deviceNA!=childSnapshot.val().by){
+                notification("Device "+childSnapshot.key+" is Remoted Off by "+childSnapshot.val().by);
+            }
         };
 
         // EDIT Info
@@ -375,7 +401,7 @@ let getDeviceState =function(id){
     firebase.database().ref('devicesID/' + id).update({
     state: chk,
     lastupdate: firebase.database.ServerValue.TIMESTAMP,
-    by:deviceNA
+    by: deviceNA
   });
  
     notification("Device "+id+" is "+(chk? "ON":"Off"));

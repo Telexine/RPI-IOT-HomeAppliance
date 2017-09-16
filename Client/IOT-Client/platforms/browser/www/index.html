@@ -77,10 +77,10 @@
     <div class="mdl-layout__drawer">
       <span class="mdl-layout-title">Quick Access</span>
       <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="#">Light 1</a>
-        <a class="mdl-navigation__link" href="#">Light 2</a>
-        <a class="mdl-navigation__link" href="#">Light 3</a>
-        <a class="mdl-navigation__link" href="#">Light 4</a>
+        <a class="mdl-navigation__link" href="#">Light 1 EDIT</a>
+        <a class="mdl-navigation__link" href="#">Light 2 EDIT</a>
+        <a class="mdl-navigation__link" href="#">Light 3 EDIT</a>
+        <a class="mdl-navigation__link" href="#">Light 4 EDIT</a>
       </nav>
     </div>
     <main class="mdl-layout__content">
@@ -196,6 +196,43 @@
             </div>
 
             <!---  END TEMPLATE -->
+
+
+
+
+              <!--- TEMPLATE -->
+        <div class="padCARD demo-card-wide mdl-card mdl-shadow--2dp">
+            <div class="mdl-card__title">
+                <div>
+                    
+                    <h4 class="mdl-card__title-text" style="color:grey;">Lighting 4</h4>
+                    <div style="float:left;width:100%"><img src="img/ico-light.png" style="border-radius:45px;width:90px"></div>
+                   <div> <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="4"><input checked class="mdl-switch__input" id="4"   type="checkbox"> <span class="mdl-switch__label"></span></label>
+                   </div>
+                </div>
+                <div style="float:left;width:60%">
+                    <div class="mdl-card__supporting-text">
+                         พัดลม  <table>
+                                <tr> 
+                                    <td>เปิดล่าสุด</td>
+                                    <td>9:34AM. 2 sep 2017</td>
+                                </tr>
+                                <tr> 
+                                       <td>ใช้ไป </td>
+                                       <td>23.2 kW/ 0.0232 Units </td>
+                                   </tr>
+                                   <tr> 
+                                           <td>ถือเป็น  </td>
+                                           <td>0.751 บาท</td>
+                                       </tr>
+                            </table>
+                    </div>
+                     
+                </div>
+            </div>
+        </div>
+
+        <!---  END TEMPLATE -->
     
     
     </div>
@@ -232,6 +269,7 @@
 <script>
        
   // Initialize Firebase
+  
   var config = {
     apiKey: "AIzaSyA1TvSKyy2PqAA4oAfuVjB9CaIupwxxfno",
     authDomain: "rpi-iot-homeappliance.firebaseapp.com",
@@ -241,24 +279,34 @@
     messagingSenderId: "851476302826"
   };
   firebase.initializeApp(config);
-  var ua = navigator.userAgent,
+   
+    // GET DEVICE INFO
+    var ua = navigator.userAgent,
     browser = {
     iPad: /iPad/.test(ua),
     iPhone: /iPhone/.test(ua),
     Android4: /Android 4/.test(ua)
-};
-let ud ;
-if(ua.indexOf('build/')==-1){ // webbrowser 
-    ud ="WEB "+ua.substr(ua.search(';')+2,ua.indexOf(')',ua.search(';'))-ua.search(';')-2);
-}else{
- ud = ua.substr(ua.search('Build/')+6,ua.indexOf(';',ua.search('Build/'))-ua.search('Build/')-6);
- 
-}
-const deviceNA= ud;  // Current Device NAme
+    };
 
-  $( document ).ready(function() {
-    // Add Event click to toggle also fe
-    for(let i =1;i<=3;i++){
+  let ud = "";
+    if(ua.indexOf('Build/')>0){ // mobile 
+        ud = ua.substr(ua.search('Build/')+6,ua.indexOf(';',ua.search('Build/'))-ua.search('Build/')-6);
+    }else{
+        // web
+   
+        ud ="WEB "+ua.substr(ua.search(';')+2,ua.indexOf(')',ua.search(';'))-ua.search(';')-2);
+    }
+    window.deviceNA= ud;  // Current Device NAme
+   
+
+
+$( document ).ready(function() {
+
+
+
+
+    // Add Event click to toggle 
+    for(let i =1;i<=4;i++){
         document.getElementById(i).addEventListener("click", manipulate);
         let myCheckbox = document.getElementById(i);
         if(i==true){myCheckbox.parentElement.MaterialSwitch.on();}else myCheckbox.parentElement.MaterialSwitch.off();;
@@ -311,11 +359,18 @@ let getDeviceState =function(id){
         let myCheckbox = document.getElementById(childSnapshot.key);
         if(childSnapshot.val().state==true){
             myCheckbox.parentElement.MaterialSwitch.on();
-            notification("Device "+childSnapshot.key+" is Remoted On ");
+            if(deviceNA!=childSnapshot.val().by){
+            notification("Device "+childSnapshot.key+" is Remoted On by "+childSnapshot.val().by);
+ 
+             }
         }else{
             myCheckbox.parentElement.MaterialSwitch.off()
-            notification("Device "+childSnapshot.key+" is Remoted Off ");
+            if(deviceNA!=childSnapshot.val().by){
+                notification("Device "+childSnapshot.key+" is Remoted Off by "+childSnapshot.val().by);
+            }
         };
+
+        // EDIT Info
 	});
 
 
@@ -334,7 +389,7 @@ let getDeviceState =function(id){
     firebase.database().ref('devicesID/' + id).update({
     state: chk,
     lastupdate: firebase.database.ServerValue.TIMESTAMP,
-    by:deviceNA
+    by: deviceNA
   });
  
     notification("Device "+id+" is "+(chk? "ON":"Off"));
