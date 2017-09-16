@@ -230,7 +230,7 @@
 <script src="js/firebase.js"></script>
 
 <script>
-    
+       
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyA1TvSKyy2PqAA4oAfuVjB9CaIupwxxfno",
@@ -241,7 +241,18 @@
     messagingSenderId: "851476302826"
   };
   firebase.initializeApp(config);
- 
+  var ua = navigator.userAgent,
+    browser = {
+    iPad: /iPad/.test(ua),
+    iPhone: /iPhone/.test(ua),
+    Android4: /Android 4/.test(ua)
+};
+
+let ud = ua.substr(ua.search('Build/')+6,ua.indexOf(';',ua.search('Build/'))-ua.search('Build/')-6)
+if(Devicename==''){
+    ud ="WEB"+ua.substr(ua.search(';')+2,ua.indexOf(')',ua.search(';'))-ua.search(';')-2);
+}
+const deviceNA= ud;
 
   $( document ).ready(function() {
 
@@ -249,10 +260,12 @@
         document.getElementById(i).addEventListener("click", manipulate);
         let myCheckbox = document.getElementById(i);
         if(i==true){myCheckbox.parentElement.MaterialSwitch.on();}else myCheckbox.parentElement.MaterialSwitch.off();;
-     
+    
       
      
   }
+
+
 // Check is firebase are connected
 let firebaseState = firebase.database().ref(".info/connected");
     firebaseState.on('value', function(connectedSnap) {
@@ -298,9 +311,7 @@ let getDeviceState =function(id){
 
 
 
-
-
-  
+ 
 
 
 

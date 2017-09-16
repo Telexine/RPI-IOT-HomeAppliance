@@ -230,7 +230,7 @@
 <script src="js/firebase.js"></script>
 
 <script>
-    
+       
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyA1TvSKyy2PqAA4oAfuVjB9CaIupwxxfno",
@@ -241,15 +241,32 @@
     messagingSenderId: "851476302826"
   };
   firebase.initializeApp(config);
- 
+  var ua = navigator.userAgent,
+    browser = {
+    iPad: /iPad/.test(ua),
+    iPhone: /iPhone/.test(ua),
+    Android4: /Android 4/.test(ua)
+};
+
+let Devicename = ua.substr(ua.search('Build/')+6,ua.indexOf(';',ua.search('Build/'))-ua.search('Build/')-6)
+if(Devicename==''){
+    Devicename ="WEB"+ua.substr(ua.search(';')+2,ua.indexOf(')',ua.search(';'))-ua.search(';')-2);
+}
 
   $( document ).ready(function() {
-    document.getElementById("1").addEventListener("click", manipulate);
-    document.getElementById("2").addEventListener("click", manipulate);
-    document.getElementById("3").addEventListener("click", manipulate);
+
+    for(let i =1;i<=3;i++){
+        document.getElementById(i).addEventListener("click", manipulate);
+        let myCheckbox = document.getElementById(i);
+        if(i==true){myCheckbox.parentElement.MaterialSwitch.on();}else myCheckbox.parentElement.MaterialSwitch.off();;
+    
+      
+     
+  }
+
 
 // Check is firebase are connected
-var firebaseState = firebase.database().ref(".info/connected");
+let firebaseState = firebase.database().ref(".info/connected");
     firebaseState.on('value', function(connectedSnap) {
     if (connectedSnap.val() === true) {
         /* we're connected! */
@@ -262,22 +279,38 @@ var firebaseState = firebase.database().ref(".info/connected");
     });
 });
  
+let getDeviceState =function(id){
+	 let getDeviceStatePromise = new Promise (function(resolve,reject){
+	   firebase.database().ref('devicesID/'+id).once('value').then(function(snapshot){
+            filteredObj = snapshot.val().state;
+	       resolve(filteredObj);
+	   });
+	 });
+	 return getDeviceStatePromise;
+	}
+
+
+
+ 
 //Listening
 
 	// Listening On device state change
-    var Rref = firebase.database().ref("deviceID/");
+    var Rref = firebase.database().ref("devicesID/");
 	 Rref.orderByKey().limitToLast(10).on('child_changed', function(childSnapshot, prevChildKey) {
-        
-	//appendMessage(childSnapshot.val().message,childSnapshot.val().uAvartar,childSnapshot.val().uid,childSnapshot.val().name, childSnapshot.val().timestamp);
-	 
+        let myCheckbox = document.getElementById(childSnapshot.key);
+        if(childSnapshot.val().state==true){
+            myCheckbox.parentElement.MaterialSwitch.on();
+            notification("Device "+childSnapshot.key+" is Remoted On ");
+        }else{
+            myCheckbox.parentElement.MaterialSwitch.off()
+            notification("Device "+childSnapshot.key+" is Remoted Off ");
+        };
 	});
 
 
 
 
-
-
-  
+ 
 
 
 
@@ -287,7 +320,7 @@ var firebaseState = firebase.database().ref(".info/connected");
     var chk=this.checked;
     var id =this.id;
     console.log(id+" "+chk);
-    firebase.database().ref('devicesID/' + id).set({
+    firebase.database().ref('devicesID/' + id).update({
     state: chk,
     lastupdate: firebase.database.ServerValue.TIMESTAMP
   });
@@ -300,7 +333,7 @@ var firebaseState = firebase.database().ref(".info/connected");
 	 'use strict';
 	 var snackbarContainer = document.querySelector('#demo-toast-example');
 	 
-	   var Msgdata = {message: msg,timeout: 5000};
+	   var Msgdata = {message: msg,timeout: 1000};
 	   snackbarContainer.MaterialSnackbar.showSnackbar(Msgdata);
 
 	};
