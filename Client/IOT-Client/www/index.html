@@ -305,13 +305,6 @@ $( document ).ready(function() {
 
 
 
-    // Add Event click to toggle 
-    for(let i =1;i<=4;i++){
-        document.getElementById(i).addEventListener("click", manipulate);
-        let myCheckbox = document.getElementById(i);
-        Update(i);
-        if(i==true){myCheckbox.parentElement.MaterialSwitch.on();}else myCheckbox.parentElement.MaterialSwitch.off();;
-  }
 
 
 // Check is firebase are connected
@@ -335,6 +328,16 @@ let firebaseState = firebase.database().ref(".info/connected");
 	         userRef.set(true);
 	       }
 	     });
+
+
+
+             // Add Event click to toggle 
+    for(let i =1;i<=4;i++){
+        document.getElementById(i).addEventListener("click", manipulate);
+        let myCheckbox = document.getElementById(i);
+        Update(i);
+        if(i==true){myCheckbox.parentElement.MaterialSwitch.on();}else myCheckbox.parentElement.MaterialSwitch.off();;
+  }
 
  
 }); //end document ready
@@ -371,8 +374,31 @@ let getDeviceLastupdate =function(id){
 	 });
 	 return getDeviceLastupdatePromise;
 	}
+let getDeviceName =function(id){
+	 let getDeviceNamePromise = new Promise (function(resolve,reject){
+	   firebase.database().ref('devicesID/'+id).once('value').then(function(snapshot){
+            filteredObj = snapshot.val().name;
+            
+	       resolve(filteredObj);
+	   });
+	 });
+	 return getDeviceNamePromise;
+	}
+let getDeviceby =function(id){
+	 let getDevicebyPromise = new Promise (function(resolve,reject){
+	   firebase.database().ref('devicesID/'+id).once('value').then(function(snapshot){
+            filteredObj = snapshot.val().by;
+            
+	       resolve(filteredObj);
+	   });
+	 });
+	 return getDevicebyPromise;
+    }
+    
 
- 
+
+
+
 //Listening
 
 	// Listening On device state change
@@ -402,16 +428,23 @@ let getDeviceLastupdate =function(id){
 
 
 function Update(id){
-    document.getElementById('desc'+id).innerHTML =  "d";
-    
+     
+
+    getDeviceName(id).then(function(result){ 
+            document.getElementById('desc'+id).innerHTML =  result;
+        });
+
         getDeviceWatt(id).then(function(result){ 
             document.getElementById('w'+id).innerHTML = result + "  Watt";
         });
          getDeviceLastupdate(id).then(function(result){ 
-            document.getElementById('t'+id).innerHTML =result;
-
+            document.getElementById('t'+id).innerHTML = result + " : by ";
+            getDeviceby(id).then(function(result){
+            document.getElementById('t'+id).innerHTML += result;
         });
-}
+        });
+       
+}   
  
 
 
