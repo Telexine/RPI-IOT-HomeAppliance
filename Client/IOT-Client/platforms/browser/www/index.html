@@ -17,9 +17,10 @@
     specific language governing permissions and limitations
     under the License.
 -->
+
 <html>
-    <head>
-        <!--
+<head>
+	<!--
         Customize this policy to fit your own app's needs. For more guidance, see:
             https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
         Some notes:
@@ -28,564 +29,615 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-         
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        <title>IOT HOME APPLIANCE</title>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="css/material.css">
-        <script defer src="js/material.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
+	<meta content="telephone=no" name="format-detection">
+	<meta content="no" name="msapplication-tap-highlight">
+	<meta content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" name="viewport">
+	<link href="css/index.css" rel="stylesheet" type="text/css">
 
-    </head>
-    <style>
-        .demo-card-wide.mdl-card {
-          width: 95%;
-        }
-        .demo-card-wide > .mdl-card__title {
-          color: #fff;
-          height: 176px;
-          background: url() center / cover;
-        }
-        .demo-card-wide > .mdl-card__menu {
-          color: #fff;
-        }
-
-        .padCARD{
-            margin-top:5px;
-            margin-left:auto; 
-            margin-right:auto; 
-
-        }
-</style>
-    <body>
-  
-
-
-<!-- Always shows a header, even in smaller screens. -->
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header">
-      <div class="mdl-layout__header-row">
-        <!-- Title -->
-        <span class="mdl-layout-title">IOT Smart Home d</span>
-        <!-- Add spacer, to align navigation to the right -->
-
-    </header>
-    <div class="mdl-layout__drawer">
-      <span class="mdl-layout-title">Quick Access</span>
-      <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="#">Light 1 EDIT</a>
-        <a class="mdl-navigation__link" href="#">Light 2 EDIT</a>
-        <a class="mdl-navigation__link" href="#">Light 3 EDIT</a>
-        <a class="mdl-navigation__link" href="#">Light 4 EDIT</a>
-      </nav>
-    </div>
-    <main class="mdl-layout__content">
-      <div class="page-content">
-        <!-- Your content goes here -->
-    
-
-
-
-
-
-        <!--- TEMPLATE -->
-        <div class="padCARD demo-card-wide mdl-card mdl-shadow--2dp">
-                <div class="mdl-card__title">
-                    <div>
-                        
-                        <h4 id="desc1" class="mdl-card__title-text" style="color:grey;">Lighting 1</h4>
-                        <div style="float:left;width:100%"><img src="img/ico-light.png" style="border-radius:45px;width:90px"></div>
-                       <div> <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="1"><input checked class="mdl-switch__input" id="1"   type="checkbox"> <span class="mdl-switch__label"></span></label>
-                       </div>
-                    </div>
-                    <div style="float:left;width:60%">
-                        <div class="mdl-card__supporting-text">
-                            <span>Stat:</span>  
-                             <table>
-                                 <tr> 
-                                     <td>เปิดล่าสุด</td>
-                                     <td  ><span id="t1"> </span></td>
-                                 </tr>
-                                 <tr> 
-                                        <td>Consumption </td>
-                                        <td > <span id="w1"> </span>  </td>
-                                    </tr>
-                                    <tr> 
-                                            <td>ถือเป็น  </td>
-                                            <td>  <span id="c1"></span> บาท</td>
-                                        </tr>
-                             </table>
-                        </div>
-                     
-                        
-                    </div>
-                </div>
-            </div>
-
-            <!---  END TEMPLATE -->
-
-
-        <!--- TEMPLATE2 -->
-        <div class="padCARD demo-card-wide mdl-card mdl-shadow--2dp">
-                <div class="mdl-card__title">
-                    <div>
-                        
-                        <h4  id="desc2"class="mdl-card__title-text" style="color:grey;">Lighting 2</h4>
-                        <div style="float:left;width:100%"><img src="img/ico-light.png" style="border-radius:45px;width:90px"></div>
-                       <div> <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="2"><input checked class="mdl-switch__input" id="2"   type="checkbox"> <span class="mdl-switch__label"></span></label>
-                       </div>
-                    </div>
-                    <div style="float:left;width:60%">
-                        <div class="mdl-card__supporting-text">
-                            <span>Stat:</span>  
-                             <table>
-                                    <tr> 
-                                        <td>เปิดล่าสุด</td>
-                                        <td> <span id="t2"></span></td>
-                                    </tr>
-                                    <tr> 
-                                           <td>Consumption </td>
-                                           <td> <span id="w2"></span> </td>
-                                       </tr>
-                                       <tr> 
-                                               <td>ถือเป็น  </td>
-                                               <td ><span id="c2"></span>  บาท</td>
-                                           </tr>
-                                </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!---  END TEMPLATE -->
-
-        <!--- TEMPLATE -->
-        <div class="padCARD demo-card-wide mdl-card mdl-shadow--2dp">
-                <div class="mdl-card__title">
-                    <div>
-                        
-                        <h4  id="desc3" class="mdl-card__title-text" style="color:grey;">Lighting 3</h4>
-                        <div style="float:left;width:100%"><img src="img/ico-light.png" style="border-radius:45px;width:90px"></div>
-                       <div> <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="3"><input checked class="mdl-switch__input" id="3"   type="checkbox"> <span class="mdl-switch__label"></span></label>
-                       </div>
-                    </div>
-                    <div style="float:left;width:60%">
-                        <div class="mdl-card__supporting-text">
-                            <span>Stat:</span>   <table>
-                                    <tr> 
-                                        <td>เปิดล่าสุด</td>
-                                        <td ><span id="t3"></span></td>
-                                    </tr>
-                                    <tr> 
-                                           <td>Consumption </td>
-                                           <td ><span id="w3"></span> </td>
-                                       </tr>
-                                       <tr> 
-                                               <td>ถือเป็น  </td>
-                                               <td ><span id="c3"></span> บาท</td>
-                                           </tr>
-                                </table>
-                        </div>
-                         
-                    </div>
-                </div>
-            </div>
-
-            <!---  END TEMPLATE -->
-
-
-
-
-              <!--- TEMPLATE -->
-        <div class="padCARD demo-card-wide mdl-card mdl-shadow--2dp">
-            <div class="mdl-card__title">
-                <div>
-                    
-                    <h4 id="desc4"class="mdl-card__title-text" style="color:grey;"> </h4>
-                    <div style="float:left;width:100%"><img src="img/ico-light.png" style="border-radius:45px;width:90px"></div>
-                   <div> <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="4"><input checked class="mdl-switch__input" id="4"   type="checkbox"> <span class="mdl-switch__label"></span></label>
-                   </div>
-                </div>
-                <div style="float:left;width:60%">
-                    <div class="mdl-card__supporting-text">
-                        <span>Stat:</span>   <table>
-                                <tr> 
-                                    <td>เปิดล่าสุด</td>
-                                    <td><span id="t4"></span></td>
-                                </tr>
-                                <tr> 
-                                       <td>Consumption </td>
-                                       <td ><span id="w4"></span></td>
-                                   </tr>
-                                   <tr> 
-                                           <td>ถือเป็น  </td>
-                                           <td ><span id="c4"></span> บาท</td>
-                                       </tr>
-                            </table>
-                    </div>
-                     
-                </div>
-            </div>
-        </div>
-
-        <!---  END TEMPLATE -->
-    
-    
-    </div>
-    </main>
-
-    <!---  Snackbar -->
-    <div class="mdl-js-snackbar mdl-snackbar" id="demo-toast-example">
-        <div class="mdl-snackbar__text"></div><button class="mdl-snackbar__action" type="button"></button>
-    </div>
-
-  </div>
-
-
-
-
-
-
-
-
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-    
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-    </body>
-
-
-
-
-<script src="js/firebase.js"></script>
-
-<script>
-       
-  // Initialize Firebase
-  
-  var config = {
-    apiKey: "AIzaSyA1TvSKyy2PqAA4oAfuVjB9CaIupwxxfno",
-    authDomain: "rpi-iot-homeappliance.firebaseapp.com",
-    databaseURL: "https://rpi-iot-homeappliance.firebaseio.com",
-    projectId: "rpi-iot-homeappliance",
-    storageBucket: "rpi-iot-homeappliance.appspot.com",
-    messagingSenderId: "851476302826"
-  };
-  firebase.initializeApp(config);
-   
-    // GET DEVICE INFO
-    var ua = navigator.userAgent,
-    browser = {
-    iPad: /iPad/.test(ua),
-    iPhone: /iPhone/.test(ua),
-    Android4: /Android 4/.test(ua)
-    };
-
-  let ud = "";
-    if(ua.indexOf('Build/')>0){ // mobile 
-        ud = ua.substr(ua.search('Build/')+6,ua.indexOf(';',ua.search('Build/'))-ua.search('Build/')-6);
-    }else{
-        // web
-   
-        ud ="WEB "+ua.substr(ua.search(';')+2,ua.indexOf(')',ua.search(';'))-ua.search(';')-2);
-    }
-    window.deviceNA= ud;  // Current Device NAme
-   
-
-
-$( document ).ready(function() {
-
-
-// set Refresh every 30 sec 
-setInterval(function(){
-    refresh()}, 30000)
-
-
-
-// Check is firebase are connected
-let firebaseState = firebase.database().ref(".info/connected");
-    firebaseState.on('value', function(connectedSnap) {
-    if (connectedSnap.val() === true) {
-        /* we're connected! */
-       notification("You are connected to cloud");
-    } else {
-        /* we're disconnected! */
- 
-        notification("You are Disconnected to cloud");
-    }
-    });
-    
-	     var amOnline = firebase.database().ref(".info/connected");
-	     var userRef = firebase.database().ref("presence/" + deviceNA);
-	     amOnline.on('value', function(snapshot) {
-	       if (snapshot.val()) {
-	         userRef.onDisconnect().remove();
-	         userRef.set(true);
+	<title>IOT HOME APPLIANCE</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="css/material.css" rel="stylesheet">
+	<script defer src="js/material.min.js">
+	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	</script>
+	<meta content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" http-equiv="Content-Security-Policy">
+	<style>
+	       .demo-card-wide.mdl-card {
+	         width: 95%;
 	       }
-	     });
+	       .demo-card-wide > .mdl-card__title {
+	         color: #fff;
+	         height: 176px;
+	         background: url() center / cover;
+	       }
+	       .demo-card-wide > .mdl-card__menu {
+	         color: #fff;
+	       }
+
+	       .padCARD{
+	           margin-top:5px;
+	           margin-left:auto; 
+	           margin-right:auto; 
+
+	       }
+	</style>
+</head>
+
+<body>
+	<!-- Always shows a header, even in smaller screens. -->
 
 
-
-             // Add Event click to toggle 
-    for(let i =1;i<=4;i++){
-        document.getElementById(i).addEventListener("click", manipulate);
-        let myCheckbox = document.getElementById(i);
-        
-
-        // fetch from cloud
-        var device = firebase.database().ref("devicesID/"+i);
-        let s;
-        
-       getstate(i).then(function(result){ 
-            s=result;
-            if(s==true){
-            myCheckbox.parentElement.MaterialSwitch.on();
-              }else myCheckbox.parentElement.MaterialSwitch.off();
-            Update(i);
-        }); 
-            
-        
-       
-      
-        
-  }
-
- 
-}); //end document ready
- 
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+		<header class="mdl-layout__header">
+			<div class="mdl-layout__header-row">
+				<!-- Title -->
+				<span class="mdl-layout-title">IOT Smart Home d</span> <!-- Add spacer, to align navigation to the right -->
+			</div>
+		</header>
 
 
+		<div class="mdl-layout__drawer">
+			<span class="mdl-layout-title">Quick Access</span>
 
- // Main function ======================================================
-function refresh(){
-    for(i = 1; i <=4;i++){
-    Update(i);
-    }
-}
-
-function Update(id){
-     
-
-    getDeviceName(id).then(function(Dname){ 
-            document.getElementById('desc'+id).innerHTML =  Dname;
-        });
-
-        getDeviceWatt(id).then(function(Dwatt){ 
-            document.getElementById('w'+id).innerHTML = Dwatt + " Watt / Energy Into the load :";
-            getkWh(id).then(function(DkWh){ 
-               document.getElementById('w'+id).innerHTML += DkWh.toFixed(4) + " kWh";
- 
-        }); 
-        }); 
-         getDeviceLastupdate(id).then(function(Dts){ 
-            document.getElementById('t'+id).innerHTML = Dts + " : by ";
-            getDeviceby(id).then(function(DbyUser){
-            document.getElementById('t'+id).innerHTML += DbyUser;
-        });
-        });
-        getkWh(id).then(function(cal){ 
-            document.getElementById('c'+id).innerHTML = ((cal*1.5445)).toFixed(2);
- 
-        }); 
-
-        return true;
-}   
- 
+			<nav class="mdl-navigation">
+				<a class="mdl-navigation__link" href="#">Light 1 EDIT</a> <a class="mdl-navigation__link" href="#">Light 2 EDIT</a> <a class="mdl-navigation__link" href="#">Light 3 EDIT</a> <a class="mdl-navigation__link" href="#">Light 4 EDIT</a>
+			</nav>
+		</div>
 
 
-  function manipulate() {
-    var chk=this.checked;
-    var id =this.id;
-    console.log(id+" "+chk);
-    firebase.database().ref('devicesID/' + id).update({
-    state: chk,
-    lastupdate: firebase.database.ServerValue.TIMESTAMP,
-    by: deviceNA
-  });
-  if(chk==false){
-      storeUsage(id);
-  }
-    notification("Device "+id+" is "+(chk? "ON":"Off"));
-    return true;
-}
+		<main class="mdl-layout__content">
+			<div class="page-content">
+				<!-- Your content goes here -->
+				<!--- TEMPLATE -->
 
 
-//Turn oFF Use in turn off
-function storeUsage(id){
+				<div class="padCARD demo-card-wide mdl-card mdl-shadow--2dp">
+					<div class="mdl-card__title">
+						<div>
+							<h4 class="mdl-card__title-text" id="desc1" style="color:grey;">Lighting 1</h4>
 
 
-let curTime =  new Date(Date.now()) ;
-let  newUsage ;
-let wat;
-let usage;
-
-var device = firebase.database().ref("devicesID/"+id);
+							<div style="float:left;width:100%"><img src="img/ico-light.png" style="border-radius:45px;width:90px">
+							</div>
 
 
-// get kw
-
-device.orderByKey().limitToLast(10).on('value', function(childSnapshot3) {
-         watt=childSnapshot3.val().wat;
-       });
- 
-
-device.orderByKey().limitToLast(10).on('value', function(childSnapshot) {
-   
-      var LastUpdate = new Date(childSnapshot.val().lastupdate) ;
-
-       usage = Math.abs(LastUpdate.getTime()-curTime.getTime());
-       usage =(usage/ 36e5)*watt; // 60*60*1000
+							<div>
+								<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="1"><input checked class="mdl-switch__input" id="1" type="checkbox"> <span class="mdl-switch__label"></span></label>
+							</div>
+						</div>
 
 
+						<div style="float:left;width:60%">
+							<div class="mdl-card__supporting-text">
+								<span>Stat:</span>
 
-});
+								<table>
+									<tr>
+										<td>เปิดล่าสุด</td>
 
-device.orderByKey().limitToLast(10).on('value', function(childSnapshot2) {
-         newUsage =usage+childSnapshot2.val().kWh;
+										<td><span id="t1"></span>
+										</td>
+									</tr>
 
-       });
 
-       firebase.database().ref('devicesID/' + id).update({
-                kWh: newUsage
-            });
-return usage;
+									<tr>
+										<td>Consumption</td>
 
-}
+										<td><span id="w1"></span>
+										</td>
+									</tr>
 
-	// SnackBar notification
-	function notification(msg) {
-	 'use strict';
-	 var snackbarContainer = document.querySelector('#demo-toast-example');
+
+									<tr>
+										<td>ถือเป็น</td>
+
+										<td><span id="c1"></span> บาท</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!---  END TEMPLATE -->
+				<!--- TEMPLATE2 -->
+
+
+				<div class="padCARD demo-card-wide mdl-card mdl-shadow--2dp">
+					<div class="mdl-card__title">
+						<div>
+							<h4 class="mdl-card__title-text" id="desc2" style="color:grey;">Lighting 2</h4>
+
+
+							<div style="float:left;width:100%"><img src="img/ico-light.png" style="border-radius:45px;width:90px">
+							</div>
+
+
+							<div>
+								<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="2"><input checked class="mdl-switch__input" id="2" type="checkbox"> <span class="mdl-switch__label"></span></label>
+							</div>
+						</div>
+
+
+						<div style="float:left;width:60%">
+							<div class="mdl-card__supporting-text">
+								<span>Stat:</span>
+
+								<table>
+									<tr>
+										<td>เปิดล่าสุด</td>
+
+										<td><span id="t2"></span>
+										</td>
+									</tr>
+
+
+									<tr>
+										<td>Consumption</td>
+
+										<td><span id="w2"></span>
+										</td>
+									</tr>
+
+
+									<tr>
+										<td>ถือเป็น</td>
+
+										<td><span id="c2"></span> บาท</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!---  END TEMPLATE -->
+				<!--- TEMPLATE -->
+
+
+				<div class="padCARD demo-card-wide mdl-card mdl-shadow--2dp">
+					<div class="mdl-card__title">
+						<div>
+							<h4 class="mdl-card__title-text" id="desc3" style="color:grey;">Lighting 3</h4>
+
+
+							<div style="float:left;width:100%"><img src="img/ico-light.png" style="border-radius:45px;width:90px">
+							</div>
+
+
+							<div>
+								<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="3"><input checked class="mdl-switch__input" id="3" type="checkbox"> <span class="mdl-switch__label"></span></label>
+							</div>
+						</div>
+
+
+						<div style="float:left;width:60%">
+							<div class="mdl-card__supporting-text">
+								<span>Stat:</span>
+
+								<table>
+									<tr>
+										<td>เปิดล่าสุด</td>
+
+										<td><span id="t3"></span>
+										</td>
+									</tr>
+
+
+									<tr>
+										<td>Consumption</td>
+
+										<td><span id="w3"></span>
+										</td>
+									</tr>
+
+
+									<tr>
+										<td>ถือเป็น</td>
+
+										<td><span id="c3"></span> บาท</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!---  END TEMPLATE -->
+				<!--- TEMPLATE -->
+
+
+				<div class="padCARD demo-card-wide mdl-card mdl-shadow--2dp">
+					<div class="mdl-card__title">
+						<div>
+							<h4 class="mdl-card__title-text" id="desc4" style="color:grey;">
+							</h4>
+
+
+							<div style="float:left;width:100%"><img src="img/ico-light.png" style="border-radius:45px;width:90px">
+							</div>
+
+
+							<div>
+								<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="4"><input checked class="mdl-switch__input" id="4" type="checkbox"> <span class="mdl-switch__label"></span></label>
+							</div>
+						</div>
+
+
+						<div style="float:left;width:60%">
+							<div class="mdl-card__supporting-text">
+								<span>Stat:</span>
+
+								<table>
+									<tr>
+										<td>เปิดล่าสุด</td>
+
+										<td><span id="t4"></span>
+										</td>
+									</tr>
+
+
+									<tr>
+										<td>Consumption</td>
+
+										<td><span id="w4"></span>
+										</td>
+									</tr>
+
+
+									<tr>
+										<td>ถือเป็น</td>
+
+										<td><span id="c4"></span> บาท</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!---  END TEMPLATE -->
+			</div>
+		</main>
+		<!---  Snackbar -->
+
+
+		<div class="mdl-js-snackbar mdl-snackbar" id="demo-toast-example">
+			<div class="mdl-snackbar__text">
+			</div>
+			<button class="mdl-snackbar__action" type="button"></button>
+		</div>
+	</div>
+
+
+	<div class="blink" id="deviceready">
+		<p class="event listening">Connecting to Device</p>
+
+
+		<p class="event received">Device is Ready</p>
+	</div>
+	<script src="cordova.js" type="text/javascript">
+	</script> 
+	<script src="js/index.js" type="text/javascript">
+	</script>
+	<script src="js/firebase.js">
+	</script> 
+	<script>
+	      
+	 // Initialize Firebase
 	 
-	   var Msgdata = {message: msg,timeout: 1000};
-	   snackbarContainer.MaterialSnackbar.showSnackbar(Msgdata);
+	 var config = {
+	   apiKey: "AIzaSyA1TvSKyy2PqAA4oAfuVjB9CaIupwxxfno",
+	   authDomain: "rpi-iot-homeappliance.firebaseapp.com",
+	   databaseURL: "https://rpi-iot-homeappliance.firebaseio.com",
+	   projectId: "rpi-iot-homeappliance",
+	   storageBucket: "rpi-iot-homeappliance.appspot.com",
+	   messagingSenderId: "851476302826"
+	 };
+	 firebase.initializeApp(config);
+	  
+	   // GET DEVICE INFO
+	   var ua = navigator.userAgent,
+	   browser = {
+	   iPad: /iPad/.test(ua),
+	   iPhone: /iPhone/.test(ua),
+	   Android4: /Android 4/.test(ua)
+	   };
 
-	};
+	 let ud = "";
+	   if(ua.indexOf('Build/')>0){ // mobile 
+	       ud = ua.substr(ua.search('Build/')+6,ua.indexOf(';',ua.search('Build/'))-ua.search('Build/')-6);
+	   }else{
+	       // web
+	  
+	       ud ="WEB "+ua.substr(ua.search(';')+2,ua.indexOf(')',ua.search(';'))-ua.search(';')-2);
+	   }
+	   window.deviceNA= ud;  // Current Device NAme
+	  
 
-  
 
-// Promise Function
-let getDeviceState =function(id){
-	 let getDeviceStatePromise = new Promise (function(resolve,reject){
-	   firebase.database().ref('devicesID/'+id).once('value').then(function(snapshot){
-            filteredObj = snapshot.val().state;
-	       resolve(filteredObj);
+	$( document ).ready(function() {
+
+
+	// set Refresh every 30 sec 
+	setInterval(function(){
+	   refresh()}, 30000)
+
+
+
+	// Check is firebase are connected
+	let firebaseState = firebase.database().ref(".info/connected");
+	   firebaseState.on('value', function(connectedSnap) {
+	   if (connectedSnap.val() === true) {
+	       /* we're connected! */
+	      notification("You are connected to cloud");
+	   } else {
+	       /* we're disconnected! */
+
+	       notification("You are Disconnected to cloud");
+	   }
 	   });
-	 });
-	 return getDeviceStatePromise;
+	   
+	        var amOnline = firebase.database().ref(".info/connected");
+	        var userRef = firebase.database().ref("presence/" + deviceNA);
+	        amOnline.on('value', function(snapshot) {
+	          if (snapshot.val()) {
+	            userRef.onDisconnect().remove();
+	            userRef.set(true);
+	          }
+	        });
+
+
+
+	            // Add Event click to toggle 
+	   for(let i =1;i<=4;i++){
+	       document.getElementById(i).addEventListener("click", manipulate);
+	       let myCheckbox = document.getElementById(i);
+	       
+
+	       // fetch from cloud
+	       var device = firebase.database().ref("devicesID/"+i);
+	       let s;
+	       
+	      getstate(i).then(function(result){ 
+	           s=result;
+	           if(s==true){
+	           myCheckbox.parentElement.MaterialSwitch.on();
+	             }else myCheckbox.parentElement.MaterialSwitch.off();
+	           Update(i);
+	       }); 
+	           
+	       
+	      
+	     
+	       
+	 }
+
+
+	}); //end document ready
+
+
+
+
+	// Main function ======================================================
+	function refresh(){
+	   for(i = 1; i <=4;i++){
+	   Update(i);
+	   }
 	}
-let getDeviceWatt =function(id){
-	 let getDeviceWattPromise = new Promise (function(resolve,reject){
-	   firebase.database().ref('devicesID/'+id).once('value').then(function(snapshot){
-            filteredObj = snapshot.val().wat;
-	       resolve(filteredObj);
-	   });
+
+	function Update(id){
+	    
+
+	   getDeviceName(id).then(function(Dname){ 
+	           document.getElementById('desc'+id).innerHTML =  Dname;
+	       });
+
+	       getDeviceWatt(id).then(function(Dwatt){ 
+	           document.getElementById('w'+id).innerHTML = Dwatt + " Watt / Energy Into the load :";
+	           getkWh(id).then(function(DkWh){ 
+	              document.getElementById('w'+id).innerHTML += DkWh.toFixed(4) + " kWh";
+
+	       }); 
+	       }); 
+	        getDeviceLastupdate(id).then(function(Dts){ 
+	           document.getElementById('t'+id).innerHTML = Dts + " : by ";
+	           getDeviceby(id).then(function(DbyUser){
+	           document.getElementById('t'+id).innerHTML += DbyUser;
+	       });
+	       });
+	       getkWh(id).then(function(cal){ 
+	           document.getElementById('c'+id).innerHTML = ((cal*1.5445)).toFixed(2);
+
+	       }); 
+
+	       return true;
+	}   
+
+
+
+	 function manipulate() {
+	   var chk=this.checked;
+	   var id =this.id;
+	   console.log(id+" "+chk);
+	   firebase.database().ref('devicesID/' + id).update({
+	   state: chk,
+	   lastupdate: firebase.database.ServerValue.TIMESTAMP,
+	   by: deviceNA
 	 });
-	 return getDeviceWattPromise;
+	 if(chk==false){
+	     storeUsage(id);
+	 }
+	   notification("Device "+id+" is "+(chk? "ON":"Off"));
+	   return true;
 	}
 
-let getDeviceLastupdate =function(id){
-	 let getDeviceLastupdatePromise = new Promise (function(resolve,reject){
-	   firebase.database().ref('devicesID/'+id).once('value').then(function(snapshot){
-            filteredObj = new Date((snapshot.val().lastupdate));
-            
-	       resolve(filteredObj.getHours()+":"+filteredObj.getMinutes()+":"+filteredObj.getSeconds()+" on "+ filteredObj.getDate() + '/'+ (filteredObj.getMonth()+1 )+ '/' +   filteredObj.getFullYear());
-	   });
-	 });
-	 return getDeviceLastupdatePromise;
-    }
-    
-let getDeviceLastupdateRAW =function(id){
-	 let getDeviceLastupdateRAWPromise = new Promise (function(resolve,reject){
-	   firebase.database().ref('devicesID/'+id).once('value').then(function(snapshot){
-            filteredObj =  snapshot.val().lastupdate;
-            
-	       resolve(filteredObj );
-	   });
-	 });
-	 return getDeviceLastupdateRAWPromise;
-	}
-let getDeviceName =function(id){
-	 let getDeviceNamePromise = new Promise (function(resolve,reject){
-	   firebase.database().ref('devicesID/'+id).once('value').then(function(snapshot){
-            filteredObj = snapshot.val().name;
-            
-	       resolve(filteredObj);
-	   });
-	 });
-	 return getDeviceNamePromise;
-	}
-let getDeviceby =function(id){
-	 let getDevicebyPromise = new Promise (function(resolve,reject){
-	   firebase.database().ref('devicesID/'+id).once('value').then(function(snapshot){
-            filteredObj = snapshot.val().by;
-            
-	       resolve(filteredObj);
-	   });
-	 });
-	 return getDevicebyPromise;
-    }
 
-    let getkWh =function(id){
-	 let getkWhPromise = new Promise (function(resolve,reject){
-	   firebase.database().ref('devicesID/'+id).once('value').then(function(snapshot){
-            filteredObj = snapshot.val().kWh;
-            
-	       resolve(filteredObj);
-	   });
-	 });
-	 return getkWhPromise;
-    }
-    let getstate =function(id){
-	 let getstatePromise = new Promise (function(resolve,reject){
-	   firebase.database().ref('devicesID/'+id).once('value').then(function(snapshot){
-            filteredObj = snapshot.val().state;
-            
-	       resolve(filteredObj);
-	   });
-	 });
-	 return getstatePromise;
-    }
+	//Turn oFF Use in turn off
+	function storeUsage(id){
+
+
+	let curTime =  new Date(Date.now()) ;
+	let  newUsage ;
+	let wat;
+	let usage;
+
+	var device = firebase.database().ref("devicesID/"+id);
+
+
+	// get kw
+
+	device.orderByKey().limitToLast(10).on('value', function(childSnapshot3) {
+	        watt=childSnapshot3.val().wat;
+	      });
+
+
+	device.orderByKey().limitToLast(10).on('value', function(childSnapshot) {
+	  
+	     var LastUpdate = new Date(childSnapshot.val().lastupdate) ;
+
+	      usage = Math.abs(LastUpdate.getTime()-curTime.getTime());
+	      usage =(usage/ 36e5)*watt; // 60*60*1000
 
 
 
-//Listening
-
-	// Listening On device state change
-    var Rref = firebase.database().ref("devicesID/");
-	 Rref.orderByKey().limitToLast(10).on('child_changed', function(childSnapshot, prevChildKey) {
-        let myCheckbox = document.getElementById(childSnapshot.key);
-        //Update Data
-       
-        Update(childSnapshot.key);
-        if(childSnapshot.val().state==true){
-            myCheckbox.parentElement.MaterialSwitch.on();
-             
-            if(deviceNA!=childSnapshot.val().by){
-            notification("Device "+childSnapshot.key+" is Remoted On by "+childSnapshot.val().by);
-                
-             }
-        }else{
-            myCheckbox.parentElement.MaterialSwitch.off()
-            if(deviceNA!=childSnapshot.val().by){
-                notification("Device "+childSnapshot.key+" is Remoted Off by "+childSnapshot.val().by);
-            }
-        };
-
-        // EDIT Info
 	});
 
+	device.orderByKey().limitToLast(10).on('value', function(childSnapshot2) {
+	        newUsage =usage+childSnapshot2.val().kWh;
+
+	      });
+
+	      firebase.database().ref('devicesID/' + id).update({
+	               kWh: newUsage
+	           });
+	return usage;
+
+	}
+
+	   // SnackBar notification
+	   function notification(msg) {
+	    'use strict';
+	    var snackbarContainer = document.querySelector('#demo-toast-example');
+	    
+	      var Msgdata = {message: msg,timeout: 1000};
+	      snackbarContainer.MaterialSnackbar.showSnackbar(Msgdata);
+
+	   };
+
+	 
+
+	// Promise Function
+	let getDeviceState =function(id){
+	    let getDeviceStatePromise = new Promise (function(resolve,reject){
+	      firebase.database().ref('devicesID/'+id).once('value').then(function(snapshot){
+	           filteredObj = snapshot.val().state;
+	          resolve(filteredObj);
+	      });
+	    });
+	    return getDeviceStatePromise;
+	   }
+	let getDeviceWatt =function(id){
+	    let getDeviceWattPromise = new Promise (function(resolve,reject){
+	      firebase.database().ref('devicesID/'+id).once('value').then(function(snapshot){
+	           filteredObj = snapshot.val().wat;
+	          resolve(filteredObj);
+	      });
+	    });
+	    return getDeviceWattPromise;
+	   }
+
+	let getDeviceLastupdate =function(id){
+	    let getDeviceLastupdatePromise = new Promise (function(resolve,reject){
+	      firebase.database().ref('devicesID/'+id).once('value').then(function(snapshot){
+	           filteredObj = new Date((snapshot.val().lastupdate));
+	           
+	          resolve(filteredObj.getHours()+":"+filteredObj.getMinutes()+":"+filteredObj.getSeconds()+" on "+ filteredObj.getDate() + '/'+ (filteredObj.getMonth()+1 )+ '/' +   filteredObj.getFullYear());
+	      });
+	    });
+	    return getDeviceLastupdatePromise;
+	   }
+	   
+	let getDeviceLastupdateRAW =function(id){
+	    let getDeviceLastupdateRAWPromise = new Promise (function(resolve,reject){
+	      firebase.database().ref('devicesID/'+id).once('value').then(function(snapshot){
+	           filteredObj =  snapshot.val().lastupdate;
+	           
+	          resolve(filteredObj );
+	      });
+	    });
+	    return getDeviceLastupdateRAWPromise;
+	   }
+	let getDeviceName =function(id){
+	    let getDeviceNamePromise = new Promise (function(resolve,reject){
+	      firebase.database().ref('devicesID/'+id).once('value').then(function(snapshot){
+	           filteredObj = snapshot.val().name;
+	           
+	          resolve(filteredObj);
+	      });
+	    });
+	    return getDeviceNamePromise;
+	   }
+	let getDeviceby =function(id){
+	    let getDevicebyPromise = new Promise (function(resolve,reject){
+	      firebase.database().ref('devicesID/'+id).once('value').then(function(snapshot){
+	           filteredObj = snapshot.val().by;
+	           
+	          resolve(filteredObj);
+	      });
+	    });
+	    return getDevicebyPromise;
+	   }
+
+	   let getkWh =function(id){
+	    let getkWhPromise = new Promise (function(resolve,reject){
+	      firebase.database().ref('devicesID/'+id).once('value').then(function(snapshot){
+	           filteredObj = snapshot.val().kWh;
+	           
+	          resolve(filteredObj);
+	      });
+	    });
+	    return getkWhPromise;
+	   }
+	   let getstate =function(id){
+	    let getstatePromise = new Promise (function(resolve,reject){
+	      firebase.database().ref('devicesID/'+id).once('value').then(function(snapshot){
+	           filteredObj = snapshot.val().state;
+	           
+	          resolve(filteredObj);
+	      });
+	    });
+	    return getstatePromise;
+	   }
 
 
 
-</script>
+	//Listening
+
+	   // Listening On device state change
+	   var Rref = firebase.database().ref("devicesID/");
+	    Rref.orderByKey().limitToLast(10).on('child_changed', function(childSnapshot, prevChildKey) {
+	       let myCheckbox = document.getElementById(childSnapshot.key);
+	       //Update Data
+	      
+	       Update(childSnapshot.key);
+	       if(childSnapshot.val().state==true){
+	           myCheckbox.parentElement.MaterialSwitch.on();
+	            
+	           if(deviceNA!=childSnapshot.val().by){
+	           notification("Device "+childSnapshot.key+" is Remoted On by "+childSnapshot.val().by);
+	               
+	            }
+	       }else{
+	           myCheckbox.parentElement.MaterialSwitch.off()
+	           if(deviceNA!=childSnapshot.val().by){
+	               notification("Device "+childSnapshot.key+" is Remoted Off by "+childSnapshot.val().by);
+	           }
+	       };
+
+	       // EDIT Info
+	   });
 
 
+
+
+	</script> 
+</body>
 </html>
