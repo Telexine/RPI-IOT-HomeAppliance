@@ -40,11 +40,11 @@ while True:
         s1 = firebase.get('/devicesID','1/state')
         s2 = firebase.get('/devicesID','2/state')
         s3 = firebase.get('/devicesID','3/state')
-        
+         s4 = firebase.get('/devicesID','4/state') 
         compareState('s1',s1)
         compareState('s2',s2)
         compareState('s3',s3)
-
+        compareState('s4',s3)
         sleep(0.01)
 
 
