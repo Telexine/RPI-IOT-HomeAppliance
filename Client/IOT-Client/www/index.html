@@ -34,25 +34,31 @@
 	<meta content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" name="viewport">
 	<link href="css/index.css" rel="stylesheet" type="text/css">
 
-	<title>IOT HOME APPLIANCE</title>
+	<title>IOT/CTOS HuaM ApP</title>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="css/material.css" rel="stylesheet">
 	<script defer src="js/material.min.js">
 	</script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
 	</script>
+	
 	<meta content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" http-equiv="Content-Security-Policy">
 	<style>
 	       .demo-card-wide.mdl-card {
-	         width: 95%;
+			 width: 95%;
+			 background-color: #2b2727;
 	       }
 	       .demo-card-wide > .mdl-card__title {
-	         color: #fff;
-	         
-	         background: url() center / cover;
+			color: #A5C25C;
+			
+			background-color: black;
 	       }
 	       .demo-card-wide > .mdl-card__menu {
-	         color: #fff;
+		
+			 
+			 color: black;
+	         
+	         background-color: #A5C25C;
 	       }
 
 	       .padCARD{
@@ -61,7 +67,7 @@
 	           margin-right:auto; 
 
 		   }
-
+		   th{color:white}
 		   td{
 			 color:black;
 		   }
@@ -69,16 +75,47 @@
 			color:grey;
 			
 		   }
+
+		   #pgload {
+			width: 100%;
+				height: 100%;
+				left: 0px;
+			top: 0px;
+			position: fixed;
+			margin: auto;
+			z-index: 9999;
+			background: url('img/giphy.gif');
+			background-repeat: no-repeat;
+			background-size: 100%;
+}
+#borderload {
+     
+}
+ 
+#loadbg {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 9998;
+    left: 0px;
+	top: 0px;
+	background-color:black; 
+
+	
+}
+ 
+
 		   @media only screen and (min-width:601px){
 		   td{
 			font-size: 1.2vw;
 			font-style: bold;
+			color: #A9B7C6 ;
 		   }
 		   span{
 			font-size: 1vw;
-			
+			color: #A5C25C;
 		   }
-		
+		   
 		}
 		    @media only screen and (max-width:600px){
 	   /* styles for mobile browsers smaller than 480px; (iPhone) */
@@ -89,17 +126,46 @@
 					   .mdl-card__title-text{font-size: 6vw;text-align: center}
     		}
 	</style>
+
+	<script>
+	
+	document.onreadystatechange = function () {
+
+  var state = document.readyState;
+  if (state == 'interactive') {
+        
+  } else if (state == 'complete') {
+      setTimeout(function(){
+         document.getElementById('interactive');
+ 
+         document.getElementById('loadbg').style.visibility="hidden";
+		 document.getElementById('borderload').style.visibility="hidden";
+		 document.getElementById('pgload').style.visibility="hidden";
+         document.getElementById('page1').style.visibility="visible";
+      },6000);
+  }
+}
+
+	
+	</script>
 </head>
 
 <body>
 	<!-- Always shows a header, even in smaller screens. -->
 
+	<div id="loadbg">
+			<div id="borderload" >
+					 
+			<div id="pgload"></div>
+		
+			</div></div>
 
-	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-		<header class="mdl-layout__header">
+
+	<div style="background-color:whitblack" class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+		<header class="mdl-layout__header" style="background-color:black">
 			<div class="mdl-layout__header-row">
 				<!-- Title -->
-				<span style="color:white" class="mdl-layout-title">IOT Smart Home </span> <!-- Add spacer, to align navigation to the right -->
+				<span style="color:#6897BB" class="mdl-layout-title">IOT Smart Home </span> <!-- Add spacer, to align navigation to the right -->
 			</div>
 		</header>
 
@@ -114,7 +180,7 @@
 
 
 		<main class="mdl-layout__content">
-			<div class="page-content">
+			<div id="page1" class="page-content">
 				<!-- Your content goes here -->
 				<!--- TEMPLATE -->
 
@@ -137,7 +203,7 @@
 
 						<div style="float:left;width:60%">
 							<div class="mdl-card__supporting-text">
-								<h6  style='color:black'>Stat:</h6>
+								<h6  style='color:white'>Stat:</h6>
 
 								<table>
 									<tr>
@@ -329,7 +395,7 @@
 <div class="padCARD demo-card-wide mdl-card mdl-shadow--2dp" style="width:100%">
 	 
 		 
-			<h4    style="color:grey;text-align:center"> TOTAL
+			<h4    style="color:#619647;text-align:center"> TOTAL
 			</h4>
  
 				<table style="margin:auto;text-align:center;margin-bottom:30px;margin-top:20px" >
@@ -339,9 +405,9 @@
 						<th style="width:32%">cost</th>
 					</tr>
 					<tr style="margin-top:5vw">
-						<td style="padding-top: 20px;font-size:7vw;color:brown" id="sum1">...</td>
-						<td style="padding-top: 20px;font-size:7vw;color:limegreen" id="sum2">...</td>
-						<td style="padding-top: 20px;font-size:7vw;color:slateblue"id="sum3">..</td>
+						<td style="padding-top: 20px;font-size:7vw;color:#214283" id="sum1">...</td>
+						<td style="padding-top: 20px;font-size:7vw;color:#D25252" id="sum2">...</td>
+						<td style="padding-top: 20px;font-size:7vw;color:#CB772F"id="sum3">..</td>
 					</tr>
 					<tr>
 							<th style="padding-top: 20px;width:32%">Watt</th>
@@ -504,10 +570,10 @@
 	       });
 
 	       getDeviceWatt(id).then(function(Dwatt){ 
-	           document.getElementById('w'+id).innerHTML = "<span id='wt"+id+"'>"+Dwatt+"</span>  <span style='color:black'>Watt<br> Energy : </span> ";
+	           document.getElementById('w'+id).innerHTML = "<span id='wt"+id+"'>"+Dwatt+"</span>  <span style='color:#D25252'>Watt<br> Energy : </span> ";
 	           
 			   getkWh(id).then(function(DkWh){ 
-	              document.getElementById('w'+id).innerHTML += "<span id='kwh"+id+"'>"+DkWh.toFixed(4) + "</span> <span style='color:black'>kWh</span>";
+	              document.getElementById('w'+id).innerHTML += "<span id='kwh"+id+"'>"+DkWh.toFixed(4) + "</span> <span style='color:#D25252'>kWh</span>";
  
 	       }); 
 	       }); 
