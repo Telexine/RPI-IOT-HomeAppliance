@@ -10,6 +10,30 @@ RPI-IOT-HomeAppliance
 
 ## Wiring
   
+### Folder
+```
+RPI - put it in Raspberry
+Client - Put in your PC and run 
+ npm update
+ npm install
+ 
+ ==  For android emulator 
+ - make sure you have android studio
+ 
+ cordova platform add android
+ cordova run android
+ 
+ == *** For Web Browser 
+ 
+ cordova run browser
+ 
+  ==  For IOS emulator 
+ - make sure you have Xcode (MacOS)
+ 
+ cordova platform add IOS
+ cordova run IOS
+ 
+```
 ### Prerequisite
 
 ```
@@ -17,7 +41,7 @@ RPI-IOT-HomeAppliance
 [Minibian] (https://minibianpi.wordpress.com/)
 
 ```
-### Installing
+### Installing in Raspberry
 
 ```
 ## Install Python
