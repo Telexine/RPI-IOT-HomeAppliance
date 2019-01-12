@@ -1,7 +1,12 @@
+![SS](https://github.com/Telexine/RPI-IOT-HomeAppliance/blob/master/Screen%20Shot%202562-01-12%20at%2013.51.50.png?raw=true)
+
 # RRPI-IOT-HomeAppliance
 
 RPI-IOT-HomeAppliance
  
+* [Slide](https://github.com/Telexine/RPI-IOT-HomeAppliance/blob/master/_IOT%20Home%20appliance%20with%20Cordova%20and%20Firebase%20%20.pptx) - Slide Presentation
+
+* [Experiment](https://github.com/Telexine/RPI-IOT-HomeAppliance/blob/master/IOT%20SMART%20HOME%20explain%20to%20experiment.docx) - Experiment (Thai)
 
 ## Hardware
 
